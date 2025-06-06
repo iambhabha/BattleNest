@@ -1,0 +1,67 @@
+name: tournament_app
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # UI and State Management
+  cupertino_icons: ^1.0.8
+  mobx: ^2.4.0
+  flutter_mobx: ^2.2.0
+
+  # Authentication
+  google_sign_in: ^6.2.1
+  firebase_auth: ^4.15.3
+  firebase_core: ^2.24.2
+  firebase_remote_config: ^4.2.13
+  flutter_facebook_auth: ^6.0.4     # ✅ Corrected package
+
+  # UI Components
+  flutter_svg: ^2.0.9
+  cached_network_image: ^3.3.1
+  flutter_screenutil: ^5.9.3
+
+  # Form Validation
+  formz: ^0.6.1
+
+  # Navigation
+  go_router: ^13.0.1
+  get_it: ^7.6.7
+
+  # Database
+  sqflite: ^2.3.2
+  path_provider: ^2.1.2
+  path: ^1.8.3
+  
+  # Theme & Localization
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.19.0
+  sign_in_with_apple: ^7.0.1
+
+  # Local Plugins
+  neopop:
+    path: ./local_plugins/neopop
+  
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: ^2.4.8
+  mobx_codegen: ^2.3.5
+  dart_style: ^2.3.0
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - assets/images/
+    - assets/icons/

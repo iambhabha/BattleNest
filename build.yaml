@@ -1,0 +1,10 @@
+targets:
+  $default:
+    builders:
+      mobx_codegen:
+        options:
+          generate_for:
+            include:
+              - lib/**.dart
+            exclude:
+              - lib/**/*.g.dart

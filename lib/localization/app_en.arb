@@ -1,0 +1,35 @@
+{
+  "welcomeText": "Welcome to BGMI Tournaments",
+  "googleSignIn": "Sign in with Google",
+  "facebookSignIn": "Sign in with Facebook",
+  "appleSignIn": "Sign in with Apple",
+  "errorOccurred": "An error occurred",
+  "loading": "Loading...",
+  "appName": "BGMI Tournaments",
+  "home": "Home",
+  "tournaments": "Tournaments",
+  "profile": "Profile",
+  "settings": "Settings",
+  "networkError": "Network error occurred",
+  "invalidCredentials": "Invalid credentials",
+  "accountNotFound": "Account not found",
+  "unknownError": "Unknown error occurred",
+  "@welcomeText": {
+    "description": "Welcome message on login screen"
+  },
+  "@googleSignIn": {
+    "description": "Google sign in button text"
+  },
+  "@facebookSignIn": {
+    "description": "Facebook sign in button text"
+  },
+  "@appleSignIn": {
+    "description": "Apple sign in button text"
+  },
+  "@errorOccurred": {
+    "description": "Error message"
+  },
+  "@loading": {
+    "description": "Loading state text"
+  }
+}
