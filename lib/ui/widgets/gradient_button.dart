@@ -1,3 +1,6 @@
+import 'dart:math' as math;
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:tournament_app/constants/app_color.dart';
 
@@ -22,7 +25,7 @@ class GradientButton extends StatefulWidget {
     this.showShimmer = false,
     this.shimmerColor = Colors.white,
     this.shimmerWidth = 100,
-    this.shimmerDuration = const Duration(milliseconds: 1500),
+    this.shimmerDuration = const Duration(seconds: 6),
   });
 
   @override
@@ -82,7 +85,7 @@ class _GradientButtonState extends State<GradientButton> with SingleTickerProvid
                   return CustomPaint(
                     painter: _ShimmerPainter(
                       ticker: _shimmerController,
-                      color: widget.shimmerColor.withOpacity(0.4),
+                      color: widget.shimmerColor,
                       width: widget.shimmerWidth,
                     ),
                   );
@@ -110,26 +113,33 @@ class _ShimmerPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final double x = size.width * 2.0 * ticker.value - width;
 
-    // Create a gradient that fades in and out
+    final rect = Rect.fromLTWH(x, 0, width, size.height);
+
+    // Diagonal gradient shimmer
     final gradient = LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
       colors: [
         color.withOpacity(0.0),
-        color,
+        color.withOpacity(0.25),
+        color.withOpacity(0.6),
+        color.withOpacity(0.25),
         color.withOpacity(0.0),
       ],
-      stops: const [0.0, 0.5, 1.0],
+      stops: const [0.0, 0.3, 0.5, 0.7, 1.0],
     );
 
-    // Create a rect that moves across the button
-    final rect = Rect.fromLTWH(x, 0, width, size.height);
-    final gradientPaint = Paint()
+    final Paint shimmerPaint = Paint()
       ..shader = gradient.createShader(rect)
-      ..blendMode = BlendMode.plus;
+      ..blendMode = BlendMode.srcATop // visually smoother than BlendMode.plus
+      ..maskFilter = const ui.MaskFilter.blur(ui.BlurStyle.normal, 3); // soft blur
 
-    // Draw the shimmer effect
     canvas.drawRRect(
-      RRect.fromRectAndRadius(rect, Radius.circular(size.height / 2)),
-      gradientPaint,
+      RRect.fromRectAndRadius(
+        rect,
+        Radius.circular(size.height / 2),
+      ),
+      shimmerPaint,
     );
   }
 

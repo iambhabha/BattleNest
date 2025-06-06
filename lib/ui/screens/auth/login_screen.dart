@@ -307,31 +307,13 @@ class _CreateTournamentScreenState extends State<CreateTournamentScreen> {
                   ],
                 ),
                 30.hh,
-                NeoPopTiltedButton(
-                  isFloating: true,
-                  onTapUp: () {},
-                  decoration: const NeoPopTiltedButtonDecoration(
-                    color: Color.fromRGBO(255, 235, 52, 1),
-                    plunkColor: Color.fromRGBO(255, 235, 52, 1),
-                    shadowColor: Color.fromRGBO(36, 36, 36, 1),
-                    showShimmer: true,
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 70.0,
-                      vertical: 15,
-                    ),
-                    child: Text('Play Now'),
-                  ),
-                ),
-                const SizedBox(height: 20),
+
                 GradientButton(
                   text: "Create Tournament",
                   onPressed: () {},
                   showShimmer: true,
                   shimmerColor: Colors.white,
-                  shimmerWidth: 150,
-                  shimmerDuration: const Duration(milliseconds: 2000),
+                  shimmerWidth: 100,
                 ),
               ],
             ),
