@@ -41,6 +41,14 @@ mixin _$AuthStore on _AuthStore, Store {
     return _$initAsyncAction.run(() => super.init());
   }
 
+  late final _$signInWithGoogleAsyncAction =
+      AsyncAction('_AuthStore.signInWithGoogle', context: context);
+
+  @override
+  Future<UserCredential?> signInWithGoogle() {
+    return _$signInWithGoogleAsyncAction.run(() => super.signInWithGoogle());
+  }
+
   late final _$_AuthStoreActionController =
       ActionController(name: '_AuthStore', context: context);
 
