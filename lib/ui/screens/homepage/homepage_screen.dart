@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tournament_app/constants/app_color.dart';
 
 class G4GHomeScreen extends StatelessWidget {
   const G4GHomeScreen({super.key});
@@ -11,7 +12,7 @@ class G4GHomeScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: const Icon(Icons.menu),
-        title: const Text('G4G'),
+        title: Text('G4G', style: TextStyle(color: AppColor.bodyColor)),
         actions: const [Padding(padding: EdgeInsets.only(right: 12.0), child: Icon(Icons.login))],
       ),
       bottomNavigationBar: BottomNavigationBar(
