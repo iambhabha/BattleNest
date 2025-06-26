@@ -13,6 +13,7 @@ import 'package:tournament_app/constants/dark_theme.dart';
 import 'package:tournament_app/services/app_localizations.dart';
 import 'package:tournament_app/ui/screens/auth/store/auth_store.dart';
 import 'package:tournament_app/stores/theme_store.dart';
+import 'package:tournament_app/ui/screens/homepage/store/home_navigation_view_model.dart';
 
 import 'package:tournament_app/ui/screens/tournament/create_tournament_screen.dart';
 import 'package:tournament_app/ui/screens/homepage/homepage_screen.dart';
@@ -38,6 +39,7 @@ Future<void> main() async {
     getIt.registerSingleton<ThemeStore>(ThemeStore());
     getIt.registerSingleton<AuthStore>(AuthStore()..init());
     getIt.registerSingleton<TournamentDropdownStore>(TournamentDropdownStore());
+    getIt.registerSingleton<HomeNavigationViewModel>(HomeNavigationViewModel());
 
     runApp(const MyApp());
   } catch (e, stackTrace) {
@@ -86,7 +88,10 @@ class MyApp extends StatelessWidget {
             // If not supported, use the first one (English) as fallback
             return supportedLocales.first;
           },
-          home: !isLoggedIn ? const G4GHomeScreen() : const CreateTournamentScreen(),
+          home:
+              !isLoggedIn
+                  ? G4GHomeScreen(navViewModel: GetIt.I<HomeNavigationViewModel>())
+                  : const CreateTournamentScreen(),
         );
       },
     );
