@@ -36,7 +36,7 @@ Future<void> main() async {
       ),
     );
 
-    setupLocator(); // ✅ All services and stores registered here
+    setupLocator();
 
     runApp(const MyApp());
   } catch (e, stackTrace) {
@@ -87,7 +87,7 @@ class MyApp extends StatelessWidget {
           },
           home:
               !isLoggedIn
-                  ? G4GHomeScreen(navViewModel: GetIt.I<HomeNavigationViewModel>())
+                  ? HomeScreen(navViewModel: GetIt.I<HomeNavigationViewModel>())
                   : const CreateTournamentScreen(),
         );
       },

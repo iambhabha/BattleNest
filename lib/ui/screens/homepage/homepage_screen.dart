@@ -5,12 +5,12 @@ import 'package:tournament_app/ui/screens/homepage/components/slider_block.dart'
 import 'package:tournament_app/ui/screens/homepage/store/home_navigation_view_model.dart';
 import 'package:tournament_app/ui/widgets/common/x_app_bar.dart';
 
-class G4GHomeScreen extends StatelessWidget {
+class HomeScreen extends StatelessWidget {
   final HomeNavigationViewModel navViewModel;
-  const G4GHomeScreen({super.key, required this.navViewModel});
+  const HomeScreen({super.key, required this.navViewModel});
 
   final List<Widget> _screens = const [
-    G4GHomeMainContent(),
+    DashBoard(),
     Center(child: Text('Events', style: TextStyle(color: Colors.white))),
     Center(child: Text('Chat', style: TextStyle(color: Colors.white))),
     Center(child: Text('Profile', style: TextStyle(color: Colors.white))),
@@ -46,8 +46,8 @@ class G4GHomeScreen extends StatelessWidget {
   }
 }
 
-class G4GHomeMainContent extends StatelessWidget {
-  const G4GHomeMainContent({super.key});
+class DashBoard extends StatelessWidget {
+  const DashBoard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +59,7 @@ class G4GHomeMainContent extends StatelessWidget {
         {"imageUrl": "https://wallpapers.com/images/featured/call-of-duty-modern-warfare-zh69toakzofabqid.jpg"},
       ],
     };
+
     return ListView(
       padding: EdgeInsets.zero,
       children: [
