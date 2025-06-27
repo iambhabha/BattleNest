@@ -10,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tournament_app/constants/light_theme.dart';
 import 'package:tournament_app/constants/dark_theme.dart';
+import 'package:tournament_app/core/di/setup_locator.dart';
 import 'package:tournament_app/env/env.dart';
 import 'package:tournament_app/services/app_localizations.dart';
 import 'package:tournament_app/ui/screens/auth/store/auth_store.dart';
@@ -18,30 +19,24 @@ import 'package:tournament_app/ui/screens/homepage/store/home_navigation_view_mo
 
 import 'package:tournament_app/ui/screens/tournament/create_tournament_screen.dart';
 import 'package:tournament_app/ui/screens/homepage/homepage_screen.dart';
-import 'package:tournament_app/ui/screens/tournament/store/tournament_dropdown_store.dart';
-
-final getIt = GetIt.instance;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   try {
     Env.setEnv('prod');
-    // Initialize Firebase
     await Firebase.initializeApp();
     await ScreenUtil.ensureScreenSize();
+
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Color(0xFF111622),
-        statusBarIconBrightness: Brightness.light, // Android ke liye
-        statusBarBrightness: Brightness.dark, // iOS ke liye
+        statusBarIconBrightness: Brightness.light,
+        statusBarBrightness: Brightness.dark,
       ),
     );
-    // Register services and stores
-    getIt.registerSingleton<ThemeStore>(ThemeStore());
-    getIt.registerSingleton<AuthStore>(AuthStore()..init());
-    getIt.registerSingleton<TournamentDropdownStore>(TournamentDropdownStore());
-    getIt.registerSingleton<HomeNavigationViewModel>(HomeNavigationViewModel());
+
+    setupLocator(); // ✅ All services and stores registered here
 
     runApp(const MyApp());
   } catch (e, stackTrace) {

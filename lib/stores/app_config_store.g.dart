@@ -25,36 +25,24 @@ mixin _$AppConfigStore on _AppConfigStore, Store {
     });
   }
 
-  late final _$isFetchedAtom =
-      Atom(name: '_AppConfigStore.isFetched', context: context);
+  late final _$_AppConfigStoreActionController =
+      ActionController(name: '_AppConfigStore', context: context);
 
   @override
-  bool get isFetched {
-    _$isFetchedAtom.reportRead();
-    return super.isFetched;
-  }
-
-  @override
-  set isFetched(bool value) {
-    _$isFetchedAtom.reportWrite(value, super.isFetched, () {
-      super.isFetched = value;
-    });
-  }
-
-  late final _$fetchErrorImageUrlAsyncAction =
-      AsyncAction('_AppConfigStore.fetchErrorImageUrl', context: context);
-
-  @override
-  Future<void> fetchErrorImageUrl() {
-    return _$fetchErrorImageUrlAsyncAction
-        .run(() => super.fetchErrorImageUrl());
+  void initConfig() {
+    final _$actionInfo = _$_AppConfigStoreActionController.startAction(
+        name: '_AppConfigStore.initConfig');
+    try {
+      return super.initConfig();
+    } finally {
+      _$_AppConfigStoreActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
   String toString() {
     return '''
-errorImageUrl: ${errorImageUrl},
-isFetched: ${isFetched}
+errorImageUrl: ${errorImageUrl}
     ''';
   }
 }
