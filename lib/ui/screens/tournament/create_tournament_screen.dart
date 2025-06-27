@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:tournament_app/constants/app_color.dart';
 import 'package:tournament_app/core/extensions/screen_size_extension.dart';
 import 'package:tournament_app/ui/screens/tournament/store/tournament_dropdown_store.dart';
 import 'package:tournament_app/ui/widgets/common/create_tournament_shimmer.dart';
-import 'package:tournament_app/ui/widgets/common/dropdown_shimmer.dart';
 import 'package:tournament_app/ui/widgets/common/text_form_field.dart';
 import 'package:tournament_app/ui/widgets/gradient_button.dart';
 import 'package:tournament_app/ui/widgets/common/x_app_bar.dart';
