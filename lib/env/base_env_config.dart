@@ -4,13 +4,20 @@ abstract class BaseEnvConfig {
 
   // Shared collection/document names
   static const String masterConfig = 'master_config';
+  static const String _config = 'config';
+  static const String _appSettings = 'app_settings';
   static const String tournamentDropdowns = 'tournament_dropdowns';
   static const String homepage = 'homepage';
 
-  // ✅ Just use envKey directly, no extra underscore
+  // Just use envKey directly, no extra underscore
   String get masterConfigPath => '$envKey$masterConfig';
 
   String get homepagePath => '$envKey$homepage';
 
-  String dropdownPath(String type) => '$masterConfigPath/$tournamentDropdowns/$type';
+  String get config => '$envKey$_config';
+  String get appSettings => _appSettings;
+
+  String dropdownPath(String type) => '$tournamentDropdowns/$type';
+
+  String get pathAppSetting => '$config/$_appSettings';
 }

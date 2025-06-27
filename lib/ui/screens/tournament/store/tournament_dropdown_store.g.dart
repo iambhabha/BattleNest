@@ -9,7 +9,8 @@ part of 'tournament_dropdown_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$TournamentDropdownStore on _TournamentDropdownStore, Store {
-  late final _$gameModesAtom = Atom(name: '_TournamentDropdownStore.gameModes', context: context);
+  late final _$gameModesAtom =
+      Atom(name: '_TournamentDropdownStore.gameModes', context: context);
 
   @override
   ObservableList<DropdownItem> get gameModes {
@@ -24,7 +25,8 @@ mixin _$TournamentDropdownStore on _TournamentDropdownStore, Store {
     });
   }
 
-  late final _$capacitiesAtom = Atom(name: '_TournamentDropdownStore.capacities', context: context);
+  late final _$capacitiesAtom =
+      Atom(name: '_TournamentDropdownStore.capacities', context: context);
 
   @override
   ObservableList<DropdownItem> get capacities {
@@ -39,7 +41,8 @@ mixin _$TournamentDropdownStore on _TournamentDropdownStore, Store {
     });
   }
 
-  late final _$entryFeesAtom = Atom(name: '_TournamentDropdownStore.entryFees', context: context);
+  late final _$entryFeesAtom =
+      Atom(name: '_TournamentDropdownStore.entryFees', context: context);
 
   @override
   ObservableList<DropdownItem> get entryFees {
@@ -54,7 +57,8 @@ mixin _$TournamentDropdownStore on _TournamentDropdownStore, Store {
     });
   }
 
-  late final _$currenciesAtom = Atom(name: '_TournamentDropdownStore.currencies', context: context);
+  late final _$currenciesAtom =
+      Atom(name: '_TournamentDropdownStore.currencies', context: context);
 
   @override
   ObservableList<DropdownItem> get currencies {
@@ -69,7 +73,8 @@ mixin _$TournamentDropdownStore on _TournamentDropdownStore, Store {
     });
   }
 
-  late final _$stagesAtom = Atom(name: '_TournamentDropdownStore.stages', context: context);
+  late final _$stagesAtom =
+      Atom(name: '_TournamentDropdownStore.stages', context: context);
 
   @override
   ObservableList<DropdownItem> get stages {
@@ -85,9 +90,8 @@ mixin _$TournamentDropdownStore on _TournamentDropdownStore, Store {
   }
 
   late final _$fetchAllDropdownsAsyncAction = AsyncAction(
-    '_TournamentDropdownStore.fetchAllDropdowns',
-    context: context,
-  );
+      '_TournamentDropdownStore.fetchAllDropdowns',
+      context: context);
 
   @override
   Future<void> fetchAllDropdowns() {
@@ -97,11 +101,11 @@ mixin _$TournamentDropdownStore on _TournamentDropdownStore, Store {
   @override
   String toString() {
     return '''
-          gameModes: ${gameModes},
-          capacities: ${capacities},
-          entryFees: ${entryFees},
-          currencies: ${currencies},
-          stages: ${stages}
+gameModes: ${gameModes},
+capacities: ${capacities},
+entryFees: ${entryFees},
+currencies: ${currencies},
+stages: ${stages}
     ''';
   }
 }

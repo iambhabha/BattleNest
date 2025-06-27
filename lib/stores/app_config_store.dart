@@ -1,5 +1,6 @@
 import 'package:mobx/mobx.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tournament_app/constants/firestore_paths.dart';
 
 part 'app_config_store.g.dart';
 
@@ -16,7 +17,8 @@ abstract class _AppConfigStore with Store {
   Future<void> fetchErrorImageUrl() async {
     if (isFetched) return;
 
-    final doc = await FirebaseFirestore.instance.collection('config').doc('app_settings').get();
+    final doc =
+        await FirebaseFirestore.instance.collection(FirestorePaths.config).doc(FirestorePaths.appSettings).get();
 
     errorImageUrl = doc.data()?['errorImageUrl'];
     isFetched = true;
@@ -24,7 +26,9 @@ abstract class _AppConfigStore with Store {
 
   // Optional: Live listener (Firestore snapshot)
   void startLiveUpdates() {
-    FirebaseFirestore.instance.collection('config').doc('app_settings').snapshots().listen((snapshot) {
+    FirebaseFirestore.instance.collection(FirestorePaths.config).doc(FirestorePaths.appSettings).snapshots().listen((
+      snapshot,
+    ) {
       errorImageUrl = snapshot.data()?['errorImageUrl'];
     });
   }
