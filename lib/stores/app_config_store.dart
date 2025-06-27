@@ -1,6 +1,7 @@
 // 📁 lib/stores/app_config_store.dart
 import 'package:mobx/mobx.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tournament_app/constants/firestore_paths.dart';
 
 part 'app_config_store.g.dart';
 
@@ -16,10 +17,11 @@ abstract class _AppConfigStore with Store {
   void initConfig() {
     if (_isListening) return;
 
-    FirebaseFirestore.instance.collection('config').doc('app_settings').snapshots().listen((snapshot) {
+    FirebaseFirestore.instance.collection(FirestorePaths.config).doc(FirestorePaths.appSettings).snapshots().listen((
+      snapshot,
+    ) {
       errorImageUrl = snapshot.data()?['errorImageUrl'];
     });
-
     _isListening = true;
   }
 }

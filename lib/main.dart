@@ -24,7 +24,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   try {
-    Env.setEnv('prod');
+    Env.setEnv('dev');
     await Firebase.initializeApp();
     await ScreenUtil.ensureScreenSize();
 
