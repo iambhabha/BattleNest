@@ -10,4 +10,6 @@ class FirestorePaths {
   static String get config => Env.config.config;
 
   static String get appSettings => Env.config.appSettings;
+
+  static String get homeContent => Env.config.homeContent;
 }

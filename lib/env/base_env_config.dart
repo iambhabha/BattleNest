@@ -8,7 +8,7 @@ abstract class BaseEnvConfig {
   static const String _appSettings = 'app_settings';
   static const String tournamentDropdowns = 'tournament_dropdowns';
   static const String homepage = 'homepage';
-
+  static const String _homeContent = 'home_content';
   // Just use envKey directly, no extra underscore
   String get masterConfigPath => '$envKey$masterConfig';
 
@@ -16,6 +16,7 @@ abstract class BaseEnvConfig {
 
   String get config => '$envKey$_config';
   String get appSettings => _appSettings;
+  String get homeContent => "$envKey$_homeContent";
 
   String dropdownPath(String type) => '$tournamentDropdowns/$type';
 

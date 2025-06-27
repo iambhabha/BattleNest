@@ -40,8 +40,16 @@ Future<void> main() async {
 
     runApp(const MyApp());
   } catch (e, stackTrace) {
-    developer.log('Error during initialization', error: e, stackTrace: stackTrace);
-    runApp(MaterialApp(home: Scaffold(body: Center(child: Text('Initialization error: $e')))));
+    developer.log(
+      'Error during initialization',
+      error: e,
+      stackTrace: stackTrace,
+    );
+    runApp(
+      MaterialApp(
+        home: Scaffold(body: Center(child: Text('Initialization error: $e'))),
+      ),
+    );
   }
 }
 
@@ -87,7 +95,9 @@ class MyApp extends StatelessWidget {
           },
           home:
               !isLoggedIn
-                  ? HomeScreen(navViewModel: GetIt.I<HomeNavigationViewModel>())
+                  ? HomeScreen(
+                    navigationViewModel: GetIt.I<HomeNavigationViewModel>(),
+                  )
                   : const CreateTournamentScreen(),
         );
       },

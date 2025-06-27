@@ -23,6 +23,8 @@ class ColorSchemeX {
   static const Color primaryGradientButtonSecond = Color(0xff792eee);
 
   static const Color bodyColorDark = Color(0xff0E0E0F);
+  static const Color tagOngoing = Color(0xff5c8646);
+  static const Color tagTrophies = Color(0xfffcb13e);
 
   static const Color buttonBackgroundColor = Color(0xffF7F7F7);
   static const Color buttonBackgroundColorDark = Color.fromARGB(255, 39, 36, 36);
