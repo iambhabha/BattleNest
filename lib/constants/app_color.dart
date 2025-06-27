@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AppColor {
+class ColorSchemeX {
   static const Color primaryColorLight = Color(0xff111622);
   static const Color primaryColorDark = Color(0xff111820);
   static const Color textColor = Color(0xff9C9C9D);
@@ -14,6 +14,10 @@ class AppColor {
   static const Color textColorDark = Color(0xffffffff);
 
   static const Color titleColor = Color(0xffffffff);
+
+  static const Color sliderIndicator = Color(0xff7079ee);
+
+  static const Color grey = Colors.grey;
 
   static const Color primaryGradientButtonFirst = Color(0xff4d34f7);
   static const Color primaryGradientButtonSecond = Color(0xff792eee);

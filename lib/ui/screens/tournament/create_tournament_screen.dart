@@ -155,7 +155,7 @@ class _CreateTournamentScreenState extends State<CreateTournamentScreen> {
   }
 
   Widget _buildLabel(String text) {
-    return Text(text, style: TextStyle(color: AppColor.titleColor));
+    return Text(text, style: TextStyle(color: ColorSchemeX.titleColor));
   }
 
   Widget _buildDisabledTextField(String value) {

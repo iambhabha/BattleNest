@@ -29,24 +29,21 @@ class Textformfield extends StatelessWidget {
   InputDecoration _inputDecoration(String hintText) {
     return InputDecoration(
       hintText: hintText,
-      hintStyle: TextStyle(
-        color: Colors.white54,
-        fontSize: fontSize?.sp ?? 13.sp,
-      ),
+      hintStyle: TextStyle(color: Colors.white54, fontSize: fontSize?.sp ?? 13.sp),
       filled: true,
       isDense: true,
-      fillColor: AppColor.textFieldFillColor,
+      fillColor: ColorSchemeX.textFieldFillColor,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: AppColor.secondaryColorDark, ),
+        borderSide: BorderSide(color: ColorSchemeX.secondaryColorDark),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: AppColor.textColor, ),
+        borderSide: BorderSide(color: ColorSchemeX.textColor),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: AppColor.secondaryColorDark, ),
+        borderSide: BorderSide(color: ColorSchemeX.secondaryColorDark),
       ),
     );
   }
@@ -58,7 +55,7 @@ class Textformfield extends StatelessWidget {
         TextStyle(
           fontSize: fontSize?.sp ?? 13.sp,
           fontWeight: fontWeight,
-          color: textColor ?? AppColor.textColorDark,
+          color: textColor ?? ColorSchemeX.textColorDark,
         );
 
     return TextFormField(

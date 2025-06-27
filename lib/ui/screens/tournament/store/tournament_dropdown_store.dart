@@ -40,7 +40,7 @@ abstract class _TournamentDropdownStore with Store {
   Future<void> _fetchDropdown(String type, ObservableList<DropdownItem> targetList) async {
     final snap =
         await _firestore
-            .collection(FirestorePaths.getDropdownCollectionPath(type))
+            .collection(FirestorePaths.dropdownPath(type))
             .where('isDeleted', isEqualTo: false)
             .orderBy('id')
             .get();

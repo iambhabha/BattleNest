@@ -19,7 +19,7 @@ class GradientButton extends StatefulWidget {
     super.key,
     required this.text,
     required this.onPressed,
-    this.gradientColors = const [AppColor.primaryGradientButtonFirst, AppColor.primaryGradientButtonSecond],
+    this.gradientColors = const [ColorSchemeX.primaryGradientButtonFirst, ColorSchemeX.primaryGradientButtonSecond],
     this.borderRadius = 12,
     this.height = 50,
     this.showShimmer = false,
@@ -38,10 +38,7 @@ class _GradientButtonState extends State<GradientButton> with SingleTickerProvid
   @override
   void initState() {
     super.initState();
-    _shimmerController = AnimationController(
-      vsync: this,
-      duration: widget.shimmerDuration,
-    )..repeat();
+    _shimmerController = AnimationController(vsync: this, duration: widget.shimmerDuration)..repeat();
   }
 
   @override
@@ -66,11 +63,7 @@ class _GradientButtonState extends State<GradientButton> with SingleTickerProvid
             alignment: Alignment.center,
             child: Text(
               widget.text,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
+              style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
             ),
           ),
         ),
@@ -99,11 +92,7 @@ class _GradientButtonState extends State<GradientButton> with SingleTickerProvid
 }
 
 class _ShimmerPainter extends CustomPainter {
-  _ShimmerPainter({
-    required this.ticker,
-    required this.color,
-    required this.width,
-  }) : super(repaint: ticker);
+  _ShimmerPainter({required this.ticker, required this.color, required this.width}) : super(repaint: ticker);
 
   final Animation<double> ticker;
   final Color color;
@@ -129,18 +118,15 @@ class _ShimmerPainter extends CustomPainter {
       stops: const [0.0, 0.3, 0.5, 0.7, 1.0],
     );
 
-    final Paint shimmerPaint = Paint()
-      ..shader = gradient.createShader(rect)
-      ..blendMode = BlendMode.srcATop // visually smoother than BlendMode.plus
-      ..maskFilter = const ui.MaskFilter.blur(ui.BlurStyle.normal, 3); // soft blur
+    final Paint shimmerPaint =
+        Paint()
+          ..shader = gradient.createShader(rect)
+          ..blendMode =
+              BlendMode
+                  .srcATop // visually smoother than BlendMode.plus
+          ..maskFilter = const ui.MaskFilter.blur(ui.BlurStyle.normal, 3); // soft blur
 
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(
-        rect,
-        Radius.circular(size.height / 2),
-      ),
-      shimmerPaint,
-    );
+    canvas.drawRRect(RRect.fromRectAndRadius(rect, Radius.circular(size.height / 2)), shimmerPaint);
   }
 
   @override

@@ -10,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tournament_app/constants/light_theme.dart';
 import 'package:tournament_app/constants/dark_theme.dart';
+import 'package:tournament_app/env/env.dart';
 import 'package:tournament_app/services/app_localizations.dart';
 import 'package:tournament_app/ui/screens/auth/store/auth_store.dart';
 import 'package:tournament_app/stores/theme_store.dart';
@@ -25,6 +26,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   try {
+    Env.setEnv('prod');
     // Initialize Firebase
     await Firebase.initializeApp();
     await ScreenUtil.ensureScreenSize();

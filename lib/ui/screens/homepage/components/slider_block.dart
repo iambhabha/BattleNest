@@ -1,5 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:tournament_app/constants/app_color.dart';
+import 'package:tournament_app/core/utils/screen_util.dart';
+import 'package:tournament_app/ui/widgets/common/c_image.dart';
 
 class SliderBlock extends StatefulWidget {
   final Map<String, dynamic> config;
@@ -16,29 +19,16 @@ class _SliderBlockState extends State<SliderBlock> {
   Widget build(BuildContext context) {
     final List<dynamic> items = widget.config['items'] ?? [];
 
-    return Column(
+    return Stack(
       children: [
         CarouselSlider.builder(
           itemCount: items.length,
           itemBuilder: (context, index, _) {
             final imageUrl = items[index]['imageUrl'];
-            return ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.network(
-                imageUrl,
-                fit: BoxFit.cover,
-                width: double.infinity,
-                errorBuilder:
-                    (_, __, ___) => Container(
-                      color: Colors.grey[800],
-                      child: const Center(child: Icon(Icons.broken_image, color: Colors.white)),
-                    ),
-              ),
-            );
+            return CImage(width: double.infinity, height: 180, imageUrl: imageUrl);
           },
           options: CarouselOptions(
-            height: 180,
-            viewportFraction: 0.9,
+            viewportFraction: 1,
             enlargeCenterPage: true,
             autoPlay: true,
             onPageChanged: (index, reason) {
@@ -48,21 +38,27 @@ class _SliderBlockState extends State<SliderBlock> {
             },
           ),
         ),
-        const SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:
-              items.asMap().entries.map((entry) {
-                return Container(
-                  width: _current == entry.key ? 16 : 8,
-                  height: 8,
-                  margin: const EdgeInsets.symmetric(horizontal: 4),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: _current == entry.key ? Colors.purple : Colors.grey,
-                  ),
-                );
-              }).toList(),
+
+        Positioned(
+          bottom: 8,
+          right: 0,
+          left: 0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children:
+                items.asMap().entries.map((entry) {
+                  return Container(
+                    width: 25,
+                    height: 5.5,
+                    margin: const EdgeInsets.symmetric(horizontal: 4),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: _current == entry.key ? ColorSchemeX.sliderIndicator : ColorSchemeX.grey,
+                    ),
+                  );
+                }).toList(),
+          ),
         ),
       ],
     );

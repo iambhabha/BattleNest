@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:tournament_app/constants/app_color.dart';
+import 'package:tournament_app/ui/screens/homepage/components/slider_block.dart';
 import 'package:tournament_app/ui/screens/homepage/store/home_navigation_view_model.dart';
 import 'package:tournament_app/ui/widgets/common/x_app_bar.dart';
 
@@ -21,7 +22,7 @@ class G4GHomeScreen extends StatelessWidget {
       backgroundColor: const Color(0xFF0E1220),
       appBar: XAppBar(
         title: 'G4G',
-        leading: const Icon(Icons.menu, color: AppColor.titleColor),
+        leading: const Icon(Icons.menu, color: ColorSchemeX.titleColor),
         actions: const [Padding(padding: EdgeInsets.only(right: 12.0), child: Icon(Icons.login))],
       ),
       bottomNavigationBar: Observer(
@@ -50,29 +51,19 @@ class G4GHomeMainContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Map<String, dynamic> config = {
+      "items": [
+        {"imageUrl": "https://mir-s3-cdn-cf.behance.net/projects/404/34f8f5121381261.Y3JvcCwxMDcwLDgzNyw1NjQsMA.jpg"},
+        {"imageUrl": "https://w0.peakpx.com/wallpaper/125/739/HD-wallpaper-call-of-duty-mobile-poster.jpg"},
+        {"imageUrl": "https://wallpapers.com/images/hd/call-of-duty-warzone-4k-poster-jij79ziyns3oegfu.jpg"},
+        {"imageUrl": "https://wallpapers.com/images/featured/call-of-duty-modern-warfare-zh69toakzofabqid.jpg"},
+      ],
+    };
     return ListView(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.zero,
       children: [
         // Slider Section
-        SizedBox(
-          height: 180,
-          child: PageView.builder(
-            itemCount: 5,
-            itemBuilder:
-                (context, index) => Container(
-                  margin: const EdgeInsets.only(right: 8),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    image: const DecorationImage(
-                      image: NetworkImage(
-                        'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dpc/2021/fall/tournament_banner.jpg',
-                      ),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-          ),
-        ),
+        SliderBlock(config: config),
         const SizedBox(height: 20),
 
         // Popular Events

@@ -8,6 +8,7 @@ class CImage extends StatelessWidget {
   final double? height;
   final BlendMode? colorBlendMode;
   final Color? overlayColor;
+  final BorderRadiusGeometry? borderRadius;
 
   const CImage({
     required this.imageUrl,
@@ -16,6 +17,7 @@ class CImage extends StatelessWidget {
     this.height,
     this.colorBlendMode,
     this.overlayColor,
+    this.borderRadius,
     super.key,
   });
 
@@ -23,14 +25,21 @@ class CImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       imageUrl: imageUrl,
-      width: width,
-      height: height,
-      fit: fit,
-      color: overlayColor,
-      colorBlendMode: colorBlendMode,
 
+      colorBlendMode: colorBlendMode,
+      imageBuilder: (context, imageProvider) {
+        return Container(
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+            borderRadius: borderRadius,
+            color: overlayColor,
+            image: DecorationImage(fit: fit, image: imageProvider),
+          ),
+        );
+      },
       placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-      errorWidget: (context, url, error) => const Icon(Icons.error),
+      errorWidget: (context, url, error) => CImage(width: double.infinity, height: 180, imageUrl: imageUrl),
     );
   }
 }
