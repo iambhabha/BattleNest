@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:tournament_app/constants/app_color.dart';
+import 'package:tournament_app/core/extensions/screen_size_extension.dart';
 import 'package:tournament_app/ui/screens/homepage/components/slider_block.dart';
 import 'package:tournament_app/ui/screens/homepage/store/home_navigation_view_model.dart';
+import 'package:tournament_app/ui/widgets/common/c_image.dart';
 import 'package:tournament_app/ui/widgets/common/x_app_bar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -21,7 +23,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF0E1220),
       appBar: XAppBar(
-        title: 'G4G',
+        title: 'ClashZone',
         leading: const Icon(Icons.menu, color: ColorSchemeX.titleColor),
         actions: const [Padding(padding: EdgeInsets.only(right: 12.0), child: Icon(Icons.login))],
       ),
@@ -61,12 +63,11 @@ class DashBoard extends StatelessWidget {
     };
 
     return ListView(
-      padding: EdgeInsets.zero,
+      padding: EdgeInsets.all(10),
       children: [
         // Slider Section
         SliderBlock(config: config),
-        const SizedBox(height: 20),
-
+        20.hh,
         // Popular Events
         sectionTitle('Popular Events'),
         SizedBox(
@@ -76,37 +77,77 @@ class DashBoard extends StatelessWidget {
             itemCount: 5,
             itemBuilder:
                 (context, index) => Container(
-                  margin: const EdgeInsets.only(right: 12),
-                  width: 220,
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: const Color(0xFF1A1F36)),
+                  width: 164,
                   padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1C1C2E),
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(color: Colors.black.withOpacity(0.2), blurRadius: 8, offset: const Offset(0, 4)),
+                    ],
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
+                      // Banner & Trophy Row
+                      Stack(
                         children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                            decoration: BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(6)),
-                            child: const Text('ONGOING', style: TextStyle(color: Colors.white, fontSize: 12)),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: CImage(
+                              width: double.infinity,
+                              height: 100,
+                              imageUrl:
+                                  'https://media.istockphoto.com/id/1149107202/photo/boy-holding-golden-trophy-and-celebrating-sport-success-with-team.jpg?s=612x612&w=0&k=20&c=xSEcKk-jN50Mngqggloi_U8LrecdBeHUUPZTpHw2oiY=',
+                            ),
                           ),
-                          const Spacer(),
-                          Container(
-                            padding: const EdgeInsets.all(4),
-                            decoration: BoxDecoration(color: Colors.orange, borderRadius: BorderRadius.circular(6)),
-                            child: const Text('🏆 5,000', style: TextStyle(color: Colors.white, fontSize: 12)),
+                          Positioned(
+                            top: 8,
+                            left: 8,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              decoration: BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(8)),
+                              child: const Text(
+                                'ONGOING',
+                                style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            top: 8,
+                            right: 8,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                              decoration: BoxDecoration(color: Colors.orange, borderRadius: BorderRadius.circular(6)),
+                              child: Row(
+                                children: const [
+                                  Icon(Icons.emoji_events, size: 12, color: Colors.white),
+                                  SizedBox(width: 4),
+                                  Text(
+                                    '1,000\$',
+                                    style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 12),
                       const Text(
                         'Community Tournament',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
                       ),
-                      const Text('League of Legends', style: TextStyle(fontSize: 13, color: Colors.grey)),
-                      const SizedBox(height: 6),
-                      const Text('Team Type: 5v5', style: TextStyle(fontSize: 12, color: Colors.white)),
-                      const Text('Participants: 64', style: TextStyle(fontSize: 12, color: Colors.white)),
+                      const SizedBox(height: 4),
+                      const Text('League of Legends', style: TextStyle(fontSize: 12, color: Colors.blueGrey)),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Text('Team: 5v5', style: TextStyle(fontSize: 11, color: Colors.grey)),
+                          Text('64 Players', style: TextStyle(fontSize: 11, color: Colors.grey)),
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -127,13 +168,7 @@ class DashBoard extends StatelessWidget {
   }
 
   Widget sectionTitle(String title) {
-    return Row(
-      children: [
-        Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
-        const Spacer(),
-        const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.grey),
-      ],
-    );
+    return SectionTitle();
   }
 
   Widget tournamentCard({
@@ -184,6 +219,22 @@ class DashBoard extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class SectionTitle extends StatelessWidget {
+  final String title = 'Popular Events';
+  const SectionTitle({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
+        const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.grey),
+      ],
     );
   }
 }

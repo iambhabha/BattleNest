@@ -25,7 +25,12 @@ class _SliderBlockState extends State<SliderBlock> {
           itemCount: items.length,
           itemBuilder: (context, index, _) {
             final imageUrl = items[index]['imageUrl'];
-            return CImage(width: double.infinity, height: 180, imageUrl: imageUrl);
+            return CImage(
+              borderRadius: BorderRadius.circular(10),
+              width: double.infinity,
+              height: 180,
+              imageUrl: imageUrl,
+            );
           },
           options: CarouselOptions(
             viewportFraction: 1,
