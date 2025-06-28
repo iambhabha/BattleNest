@@ -72,3 +72,6 @@ This is an **open-source mobile app** to organize and automate **BGMI tournament
    ```bash
    git clone https://github.com/yourusername/bgmi-tournament-app.git
    cd bgmi-tournament-app
+
+![Uploading image.png…]()
+
