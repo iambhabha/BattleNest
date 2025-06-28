@@ -72,7 +72,8 @@ All match and player data updates in real time using Firestore listeners.
 
 ```bash
 git clone https://github.com/yourusername/bgmi-tournament-app.git
-cd bgmi-tournament-app
+cd bgmi-tournament-app'
+```
 
 ## Contribution Guide
 
