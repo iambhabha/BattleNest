@@ -24,7 +24,7 @@ options.set_capability("noReset", True)  # Always fresh
 # Step 2: Launch Appium driver
 driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
 driver.implicitly_wait(10)
-print("✅ Appium connected and BGMI launched")
+print(" Appium connected and BGMI launched")
 
 # Step 3: Helper to click if element exists
 def click_if_exists(text, timeout=5):
@@ -35,14 +35,14 @@ def click_if_exists(text, timeout=5):
             )
         )
         el.click()
-        print(f"✅ Clicked: {text}")
+        print(f" Clicked: {text}")
     except:
         print(f"ℹ️ '{text}' not found, skipping.")
 
 # Visual tap using adb swipe
 def visual_tap(x, y, duration=50):
     subprocess.run(["adb", "shell", "input", "swipe", str(x), str(y), str(x), str(y), str(duration)])
-    print(f"✅ Tap at ({x}, {y})")
+    print(f" Tap at ({x}, {y})")
 
 # Step 4: Handle permission popups (only on first launch)
 click_if_exists("Allow")
@@ -106,7 +106,7 @@ def wait_for_full_resource_download(max_retries=3):
 
     final_text = get_ocr_text()
     if "Low-spec" in final_text:
-        print("✅ Low-spec option now visible.")
+        print(" Low-spec option now visible.")
         visual_tap(800, 500)
     else:
         print("❌ Low-spec option not found after wait.")
@@ -124,7 +124,7 @@ def wait_and_tap_low_spec(timeout=90, interval=3):
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         text = pytesseract.image_to_string(gray)
         if "Low-spec" in text:
-            print("✅ Detected 'Low-spec'")
+            print(" Detected 'Low-spec'")
             visual_tap(800, 500)  # Update coordinates as needed
             return True
         else:
@@ -142,7 +142,7 @@ wait_and_tap_low_spec()
 # Step 7: Try clicking OK button
 time.sleep(180)  # Allow time for low-spec to appear
 
-print("✅ Done")
+print(" Done")
 driver.quit()  # Optional
 options = UiAutomator2Options()
 options.set_capability("platformName", "Android")
