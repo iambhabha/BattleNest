@@ -1,14 +1,14 @@
-# 🎮 BGMI Tournament Automation App (Open Source)
+# BGMI Tournament Automation App (Open Source)
 
-This is an **open-source mobile app** to organize and automate **BGMI tournaments** with a beautiful UI and powerful backend automation — **fully powered by Firebase**!
+A mobile app to automate **BGMI tournaments** with a clean UI and fully serverless backend powered by **Firebase**.
 
-> 💡 **UI Inspired by:**  
-> 🎨 [Dribbble Design Source](https://cdn.dribbble.com/userupload/34262052/file/original-09e8e9a348b2c82cfac4983f8b66fc30.jpg?resize=1600x1026&vertical=center)  
-> 💼 [Behance Project](https://www.behance.net/gallery/199177723/Mobile-Application-Design-for-Gaming-Platform)
+> **UI Inspired by:**  
+> [Dribbble Design](https://cdn.dribbble.com/userupload/34262052/file/original-09e8e9a348b2c82cfac4983f8b66fc30.jpg?resize=1600x1026&vertical=center)  
+> [Behance Project](https://www.behance.net/gallery/199177723/Mobile-Application-Design-for-Gaming-Platform)
 
 ---
 
-## 📱 Preview
+## Preview
 
 <div align="center">
   <img src="https://cdn.dribbble.com/userupload/34262052/file/original-09e8e9a348b2c82cfac4983f8b66fc30.jpg?resize=1600x1026&vertical=center" width="100%" />
@@ -16,139 +16,125 @@ This is an **open-source mobile app** to organize and automate **BGMI tournament
 
 ---
 
-## 🚀 Features
+## Features
 
-✅ Create tournaments with game mode, player capacity, and prize pool  
-✅ Automated **room creation** with Firebase Cloud Functions  
-✅ Auto **kick logic** using real-time validation in Firestore  
-✅ Share tournaments via links  
-✅ Player registration, match scheduling, and leaderboard  
-✅ Admin/Host panel with control options  
-
----
-
-## 🔥 Powered by Firebase
-
-| Feature              | Firebase Service Used            |
-|----------------------|----------------------------------|
-| Authentication       | Firebase Auth                    |
-| Database             | Firestore                        |
-| Automation Logic     | Cloud Functions (Node.js)        |
-| Storage (Images)     | Firebase Storage                 |
-| Notifications        | Firebase Cloud Messaging (FCM)   |
-| Hosting (Optional)   | Firebase Hosting (Web version)   |
+- Create tournaments with custom settings (mode, capacity, prize pool)
+- Auto room creation via Firebase Cloud Functions
+- Auto-kick system with Firestore triggers
+- Player registration, match scheduling, and leaderboard
+- Admin panel with control features
+- Share tournaments via invite links
 
 ---
 
-## 💡 How Automation Works
+## Firebase Services Used
 
-- **Room Creation**  
-  → When a match is scheduled, a Firebase Cloud Function creates a virtual "room" entry and updates all participants in real time.
-
-- **Auto Kick System**  
-  → Players not verifying before deadline or breaking rules are auto-removed using Firestore triggers.
-
-- **Live Updates**  
-  → Firestore streams enable instant updates for players and hosts.
-
----
-
-## 🛠 Tech Stack
-
-| Layer       | Technology      |
-|-------------|-----------------|
-| Frontend    | Flutter         |
-| Backend     | Firebase (100%) |
-| Auth        | Firebase Auth   |
-| DB          | Firestore       |
-| Logic       | Cloud Functions |
-| Messaging   | FCM             |
+| Feature              | Service                     |
+|----------------------|------------------------------|
+| Authentication       | Firebase Auth                |
+| Realtime Database    | Firestore                    |
+| Backend Logic        | Cloud Functions (Node.js)    |
+| Image Uploads        | Firebase Storage             |
+| Push Notifications   | Firebase Cloud Messaging     |
+| Optional Web Hosting | Firebase Hosting             |
 
 ---
 
-## 🧪 Getting Started
+## Automation Workflow
 
-1. **Clone the Repo**
-   ```bash
-   git clone https://github.com/yourusername/bgmi-tournament-app.git
-   cd bgmi-tournament-app
+### Room Creation  
+A scheduled match triggers a Firebase Function that creates the match room and notifies participants.
 
-## 🤝 Contribution & Reward System
+### Auto Kick Logic  
+Users who fail to verify or break rules are auto-removed via Firestore triggers.
 
-We welcome all contributors — whether you're a developer, designer, tester, or just someone with a great idea. This is a community-driven open-source project, and we strongly believe in sharing growth, visibility, and rewards with everyone who supports it.
-
----
-
-### ✅ How You Can Contribute
-
-1. **💻 Code Contributions**
-   - Fix bugs or crashes
-   - Add new features (e.g. leaderboard, dark mode, team system)
-   - Improve UI/UX or animations
-
-2. **⚙️ Firebase Enhancements**
-   - Optimize or add new Cloud Functions
-   - Improve automation for room creation or kicking logic
-
-3. **📘 Documentation**
-   - Write or improve the README, setup guides
-   - Create tutorial videos or language translations
-
-4. **🌐 Community Support**
-   - Help others in Issues or Discussions
-   - Report bugs with details
-   - Suggest useful features or improvements
+### Live Sync  
+All match and player data updates in real time using Firestore listeners.
 
 ---
 
-### 🏅 Recognition & Shout-outs
+## Tech Stack
 
-If you contribute meaningfully, you will:
-- Be listed in `CONTRIBUTORS.md`
-- Get a Contributor badge on GitHub
-- Receive public shout-outs in release notes and social posts
-- Be featured in the **"Top Contributors" section of the app (coming soon)**
+| Layer     | Technology             |
+|-----------|------------------------|
+| Frontend  | Flutter                |
+| Backend   | Firebase (Serverless)  |
+| Database  | Firestore              |
+| Auth      | Firebase Auth          |
+| Functions | Firebase Cloud Functions (Node.js) |
+| Messaging | Firebase Cloud Messaging |
 
 ---
 
-### 💸 Earning Opportunities
+## Getting Started
 
-This project is open-source, but if it grows into something bigger or generates revenue through:
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/bgmi-tournament-app.git
+cd bgmi-tournament-app
+
+## Contribution Guide
+
+We welcome all contributors — developers, designers, writers, and testers.
+
+### How You Can Contribute
+
+#### Code Contributions
+- Fix bugs or crashes  
+- Add new features (e.g., team system, dark mode)  
+- Improve UI/UX or app performance
+
+#### Firebase Enhancements
+- Create or optimize Cloud Functions  
+- Enhance automation for room creation or kicking logic
+
+#### Documentation
+- Improve the README and setup guides  
+- Translate content or write walkthroughs
+
+#### Community Support
+- Report bugs with context and details  
+- Help answer GitHub Issues or discussions  
+- Suggest practical features or improvements
+
+---
+
+### Contribution Rules
+
+- Use Pull Requests for all changes (no direct pushes to main)  
+- Code should be clean, tested, and well-documented  
+- Avoid blindly submitting AI-generated code without review  
+- Collaborate respectfully and ensure peer review before merging
+
+---
+
+### Recognition
+
+Meaningful contributors will:
+- Be added to `CONTRIBUTORS.md`  
+- Receive a Contributor badge on GitHub  
+- Be mentioned in release notes  
+- Be listed in the app’s “Top Contributors” section (coming soon)
+
+---
+
+### Earning Opportunities
+
+If the project generates revenue via:
 - Sponsorships  
-- Premium versions  
-- Freelance requests  
+- Premium features  
+- Freelance work  
 
-…then **top contributors will receive a fair share** or be offered **paid tasks** like:
-
-- Feature development
-- Custom module work
-- App maintenance or bug fixes
-
-> We’re committed to sharing growth with the community that builds this. Your support matters.
+Then top contributors may receive:
+- Paid feature development tasks  
+- Custom module work  
+- Revenue share based on contribution
 
 ---
 
-### 💡 Suggest New Ideas
+### Suggest a Feature or Report an Issue
 
-We love smart contributions. Feel free to suggest:
-- New game modes or logic
-- UI/UX improvements
-- Admin tools or analytics dashboards
-- Any idea that helps organizers or players
-
-Open an [Issue](https://github.com/yourusername/bgmi-tournament-app/issues) or reach out directly.
-
----
-
-### 📜 Contribution Rules
-
-- Be respectful and collaborative
-- Keep your code clean, tested, and explain changes clearly
-- Avoid AI-generated/copied content without reviewing
-- Use Pull Requests for all changes (no direct pushes)
-
----
-
-Let's build something amazing together — and if this project succeeds, **you succeed with it.**
-
+- Open an Issue here: [GitHub Issues](https://github.com/yourusername/bgmi-tournament-app/issues)  
+- Submit a Pull Request with your improvements or fixes
 
