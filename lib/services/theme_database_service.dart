@@ -1,7 +1,8 @@
 import 'dart:io';
-import 'package:flutter/foundation.dart';
+
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:tournament_app/core/utils/app_logger.dart';
 
 class ThemeDatabaseService {
   static const _databaseName = 'app_database.db';
@@ -18,33 +19,34 @@ class ThemeDatabaseService {
   factory ThemeDatabaseService() {
     return _instance;
   }
-  
+
   // Private constructor for singleton
   ThemeDatabaseService._internal();
-  
+
   // Singleton instance
-  static final ThemeDatabaseService _instance = ThemeDatabaseService._internal();
+  static final ThemeDatabaseService _instance =
+      ThemeDatabaseService._internal();
 
   // Initialize the database
   Future<void> initialize() async {
     if (_isInitialized) return;
-    
+
     final databasesPath = await getDatabasesPath();
     final path = join(databasesPath, _databaseName);
-    
+
     // Ensure the directory exists
     try {
       await Directory(databasesPath).create(recursive: true);
     } catch (_) {}
-    
+
     _database = await openDatabase(
       path,
       version: _databaseVersion,
       onCreate: _onCreate,
     );
-    
+
     _isInitialized = true;
-    
+
     // Ensure the default theme preference exists
     await _ensureDefaultPreferences();
   }
@@ -66,23 +68,21 @@ class ThemeDatabaseService {
       )
     ''');
   }
-  
+
   // Ensure default preferences exist
   Future<void> _ensureDefaultPreferences() async {
     final db = await database;
     final count = Sqflite.firstIntValue(
-      await db.rawQuery('SELECT COUNT(*) FROM $table WHERE $columnKey = ?', [themeKey]),
+      await db.rawQuery('SELECT COUNT(*) FROM $table WHERE $columnKey = ?', [
+        themeKey,
+      ]),
     );
-    
+
     if (count == 0) {
-      await db.insert(
-        table,
-        {
-          columnKey: themeKey,
-          columnValue: 'system',
-        },
-        conflictAlgorithm: ConflictAlgorithm.replace,
-      );
+      await db.insert(table, {
+        columnKey: themeKey,
+        columnValue: 'system',
+      }, conflictAlgorithm: ConflictAlgorithm.replace);
     }
   }
 
@@ -100,9 +100,9 @@ class ThemeDatabaseService {
         return maps.first[columnValue] as String;
       }
     } catch (e) {
-      debugPrint('Error getting theme mode: $e');
+      AppLogger.error('Error getting theme mode: $e');
     }
-    
+
     // Return default value if not found or error occurs
     return 'system';
   }
@@ -111,16 +111,12 @@ class ThemeDatabaseService {
   Future<void> setThemeMode(String themeMode) async {
     try {
       final db = await database;
-      await db.insert(
-        table,
-        {
-          columnKey: themeKey,
-          columnValue: themeMode,
-        },
-        conflictAlgorithm: ConflictAlgorithm.replace,
-      );
+      await db.insert(table, {
+        columnKey: themeKey,
+        columnValue: themeMode,
+      }, conflictAlgorithm: ConflictAlgorithm.replace);
     } catch (e) {
-      debugPrint('Error setting theme mode: $e');
+      AppLogger.error('Error setting theme mode: $e');
       rethrow;
     }
   }

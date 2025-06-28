@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
-import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
-import 'package:neopop/widgets/buttons/neopop_tilted_button/neopop_tilted_button.dart';
-import 'package:tournament_app/constants/app_color.dart';
 import 'package:tournament_app/core/extensions/screen_size_extension.dart';
 import 'package:tournament_app/services/app_localizations.dart';
 import 'package:tournament_app/stores/theme_store.dart';
 import 'package:tournament_app/ui/screens/auth/store/auth_store.dart';
-import 'package:tournament_app/ui/widgets/common/text_form_field.dart';
-import 'package:tournament_app/ui/widgets/gradient_button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -44,8 +38,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         : AppLocalizations.of(context)!.darkTheme,
                 child: IconButton(
                   icon: Icon(
-                    _themeStore.isDarkMode ? Icons.nightlight_round : Icons.wb_sunny,
-                    color: _themeStore.isDarkMode ? Colors.white : Colors.grey.shade900,
+                    _themeStore.isDarkMode
+                        ? Icons.nightlight_round
+                        : Icons.wb_sunny,
+                    color:
+                        _themeStore.isDarkMode
+                            ? Colors.white
+                            : Colors.grey.shade900,
                   ),
                   onPressed: () {
                     _themeStore.toggleTheme();
@@ -66,7 +65,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     }
                   } catch (e) {
                     if (context.mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Login failed: $e')));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Login failed: $e')),
+                      );
                     }
                   }
                 },
@@ -89,7 +90,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   Text(
                     AppLocalizations.of(context)!.welcomeBack,
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: context.widthPercent(10)),
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontSize: context.widthPercent(10),
+                    ),
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -97,14 +100,23 @@ class _LoginScreenState extends State<LoginScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image(width: 30, image: AssetImage('assets/icons/google.png')),
+                          Image(
+                            width: 30,
+                            image: AssetImage('assets/icons/google.png'),
+                          ),
                           const SizedBox(width: 40),
-                          Image(width: 30, image: AssetImage('assets/icons/facebook.png')),
+                          Image(
+                            width: 30,
+                            image: AssetImage('assets/icons/facebook.png'),
+                          ),
                         ],
                       ),
                       const SizedBox(height: 50),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 5,
+                        ),
                         decoration: BoxDecoration(
                           color: Theme.of(context).primaryColorLight,
                           borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -112,16 +124,22 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: TextField(
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: AppLocalizations.of(context)!.emailOrPhone,
+                            hintText:
+                                AppLocalizations.of(context)!.emailOrPhone,
                           ),
                         ),
                       ),
                       const SizedBox(height: 20),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 5,
+                        ),
                         decoration: BoxDecoration(
                           color: Theme.of(context).primaryColorLight,
-                          borderRadius: const BorderRadius.all(Radius.circular(20)),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(20),
+                          ),
                         ),
                         child: TextField(
                           obscureText: true,
@@ -132,22 +150,33 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      Text(AppLocalizations.of(context)!.forgotPassword, style: Theme.of(context).textTheme.bodyMedium),
+                      Text(
+                        AppLocalizations.of(context)!.forgotPassword,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
                       const SizedBox(height: 20),
                       MaterialButton(
                         onPressed: () {},
                         elevation: 0,
                         minWidth: double.infinity,
                         padding: const EdgeInsets.all(18),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                         color: Colors.blue,
                         child: Text(
                           AppLocalizations.of(context)!.login,
-                          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                       const SizedBox(height: 30),
-                      Text(AppLocalizations.of(context)!.createAccount, style: Theme.of(context).textTheme.bodyMedium),
+                      Text(
+                        AppLocalizations.of(context)!.createAccount,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
                     ],
                   ),
                 ],

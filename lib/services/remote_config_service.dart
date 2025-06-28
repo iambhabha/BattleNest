@@ -1,5 +1,7 @@
-import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'dart:convert';
+
+import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:tournament_app/core/utils/app_logger.dart';
 
 class RemoteConfigService {
   static final RemoteConfigService _instance = RemoteConfigService._internal();
@@ -9,10 +11,12 @@ class RemoteConfigService {
   final FirebaseRemoteConfig _remoteConfig = FirebaseRemoteConfig.instance;
 
   Future<void> initialize() async {
-    await _remoteConfig.setConfigSettings(RemoteConfigSettings(
-      minimumFetchInterval: const Duration(minutes: 5),
-      fetchTimeout: const Duration(seconds: 10),
-    ));
+    await _remoteConfig.setConfigSettings(
+      RemoteConfigSettings(
+        minimumFetchInterval: const Duration(minutes: 5),
+        fetchTimeout: const Duration(seconds: 10),
+      ),
+    );
 
     await _remoteConfig.setDefaults({
       'translations': jsonEncode({
@@ -29,7 +33,7 @@ class RemoteConfigService {
           'facebookSignIn': 'Facebook से लॉगिन करें',
           'appleSignIn': 'Apple से लॉगिन करें',
           // Add more Hindi translations here
-        }
+        },
       }),
     });
 
@@ -40,7 +44,7 @@ class RemoteConfigService {
     try {
       await _remoteConfig.fetchAndActivate();
     } catch (e) {
-      print('Failed to fetch translations: $e');
+      AppLogger.error('Failed to fetch translations: $e');
     }
   }
 

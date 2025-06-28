@@ -8,7 +8,6 @@ final ThemeData lightTheme = ThemeData(
     primary: Colors.blue,
     secondary: Colors.blueAccent,
     surface: Colors.white,
-    background: Colors.grey[50]!,
     error: Colors.red,
   ),
   scaffoldBackgroundColor: Colors.grey[50],

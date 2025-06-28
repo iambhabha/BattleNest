@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tournament_app/core/utils/app_logger.dart';
+
 import '../../widgets/gradient_button.dart';
 
 class EventDetailScreen extends StatelessWidget {
@@ -25,12 +27,22 @@ class EventDetailScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            const Text('Community Tournament', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-            const Text('League of Legends', style: TextStyle(color: Colors.blueAccent)),
+            const Text(
+              'Community Tournament',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+            const Text(
+              'League of Legends',
+              style: TextStyle(color: Colors.blueAccent),
+            ),
             const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [Text('Entry Fee: Free'), Text('Game Mode: 5v5'), Text('Capacity: 32')],
+              children: const [
+                Text('Entry Fee: Free'),
+                Text('Game Mode: 5v5'),
+                Text('Capacity: 32'),
+              ],
             ),
             const SizedBox(height: 12),
             Row(
@@ -45,25 +57,38 @@ class EventDetailScreen extends StatelessWidget {
             const SizedBox(height: 20),
             Container(
               padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(color: Colors.orange, borderRadius: BorderRadius.circular(8)),
+              decoration: BoxDecoration(
+                color: Colors.orange,
+                borderRadius: BorderRadius.circular(8),
+              ),
               child: const Text(
                 '\$15,000',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
             ),
             const SizedBox(height: 20),
-            const Text('About', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            const Text(
+              'About',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 6),
             const Text(
               'Hello everyone! As League of Legends community, we decided to create a Community tournament. We are happy to invite you to our first competition, get your team now!',
             ),
             const SizedBox(height: 16),
-            const Text('Rules', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            const Text(
+              'Rules',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
             const Text('Rules are simple and easy to obey, have fun!'),
             const SizedBox(height: 20),
             GradientButton(
               text: 'Register',
-              onPressed: () => debugPrint('Navigate to registration'),
+              onPressed: () => AppLogger.info('Navigate to registration'),
               showShimmer: true,
             ),
           ],

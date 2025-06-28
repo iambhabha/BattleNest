@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tournament_app/core/extensions/screen_size_extension.dart';
 import 'package:tournament_app/ui/screens/homepage/components/section_title.dart';
 import 'package:tournament_app/ui/screens/homepage/components/slider_block.dart';

@@ -42,7 +42,7 @@ class _AdjacentButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       children: [
         Expanded(
           flex: 5,
@@ -50,15 +50,15 @@ class _AdjacentButtons extends StatelessWidget {
             children: [
               Row(
                 mainAxisSize: MainAxisSize.min,
-                children: const [
+                children: [
                   _WhiteHorizontal(),
                   _BlackHorizontal(),
                 ],
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 10),
               Row(
                 mainAxisSize: MainAxisSize.min,
-                children: const [
+                children: [
                   _BlackHorizontal(),
                   _WhiteHorizontal(),
                 ],
@@ -66,7 +66,7 @@ class _AdjacentButtons extends StatelessWidget {
             ],
           ),
         ),
-        const Spacer(flex: 1),
+        Spacer(flex: 1),
         Expanded(
           flex: 5,
           child: Row(
@@ -74,7 +74,7 @@ class _AdjacentButtons extends StatelessWidget {
               Expanded(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
-                  children: const [
+                  children: [
                     _WhiteVertical(),
                     _BlackVertical(),
                   ],
@@ -83,7 +83,7 @@ class _AdjacentButtons extends StatelessWidget {
               Expanded(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
-                  children: const [
+                  children: [
                     _BlackVertical(),
                     _WhiteVertical(),
                   ],
@@ -198,7 +198,7 @@ class _ConfigButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return const SizedBox(
       width: 190,
       height: 190,
       child: NeoPopCard(
@@ -211,7 +211,7 @@ class _ConfigButtons extends StatelessWidget {
           children: [
             Column(
               mainAxisSize: MainAxisSize.min,
-              children: const [
+              children: [
                 _BlackButton(position: Position.topLeft),
                 SizedBox(height: 10),
                 _BlackButton(position: Position.centerLeft),
@@ -219,10 +219,10 @@ class _ConfigButtons extends StatelessWidget {
                 _BlackButton(position: Position.bottomLeft),
               ],
             ),
-            const Expanded(child: SizedBox()),
+            Expanded(child: SizedBox()),
             Column(
               mainAxisSize: MainAxisSize.min,
-              children: const [
+              children: [
                 _BlackButton(position: Position.topCenter),
                 SizedBox(height: 10),
                 _BlackButton(position: Position.center),
@@ -230,10 +230,10 @@ class _ConfigButtons extends StatelessWidget {
                 _BlackButton(position: Position.bottomCenter),
               ],
             ),
-            const Expanded(child: SizedBox()),
+            Expanded(child: SizedBox()),
             Column(
               mainAxisSize: MainAxisSize.min,
-              children: const [
+              children: [
                 _BlackButton(position: Position.topRight),
                 SizedBox(height: 10),
                 _BlackButton(position: Position.centerRight),

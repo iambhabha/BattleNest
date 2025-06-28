@@ -1,56 +1,43 @@
 import 'dart:async';
-import 'dart:developer' as developer;
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
-import 'package:tournament_app/constants/light_theme.dart';
 import 'package:tournament_app/constants/dark_theme.dart';
+import 'package:tournament_app/constants/light_theme.dart';
 import 'package:tournament_app/core/di/setup_locator.dart';
+import 'package:tournament_app/core/utils/app_logger.dart';
 import 'package:tournament_app/env/env.dart';
 import 'package:tournament_app/services/app_localizations.dart';
-import 'package:tournament_app/ui/screens/auth/store/auth_store.dart';
 import 'package:tournament_app/stores/theme_store.dart';
-import 'package:tournament_app/ui/screens/homepage/store/home_navigation_view_model.dart';
-
-import 'package:tournament_app/ui/screens/tournament/create_tournament_screen.dart';
+import 'package:tournament_app/ui/screens/auth/store/auth_store.dart';
 import 'package:tournament_app/ui/screens/homepage/homepage_screen.dart';
+import 'package:tournament_app/ui/screens/homepage/store/home_navigation_view_model.dart';
+import 'package:tournament_app/ui/screens/tournament/create_tournament_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  try {
-    Env.setEnv('dev');
-    await Firebase.initializeApp();
-    await ScreenUtil.ensureScreenSize();
+  Env.setEnv('dev');
+  await Firebase.initializeApp();
+  await ScreenUtil.ensureScreenSize();
+  AppLogger.init(isDebug: kDebugMode);
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Color(0xFF111622),
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.dark,
+    ),
+  );
 
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor: Color(0xFF111622),
-        statusBarIconBrightness: Brightness.light,
-        statusBarBrightness: Brightness.dark,
-      ),
-    );
+  setupLocator();
 
-    setupLocator();
-
-    runApp(const MyApp());
-  } catch (e, stackTrace) {
-    developer.log(
-      'Error during initialization',
-      error: e,
-      stackTrace: stackTrace,
-    );
-    runApp(
-      MaterialApp(
-        home: Scaffold(body: Center(child: Text('Initialization error: $e'))),
-      ),
-    );
-  }
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
