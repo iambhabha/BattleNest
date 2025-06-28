@@ -136,6 +136,6 @@ Then top contributors may receive:
 
 ### Suggest a Feature or Report an Issue
 
-- Open an Issue here: [GitHub Issues](https://github.com/yourusername/bgmi-tournament-app/issues)  
+- Open an Issue here: [GitHub Issues](https://github.com/iambhabha/bgmi-tournament-app/issues)  
 - Submit a Pull Request with your improvements or fixes
 
