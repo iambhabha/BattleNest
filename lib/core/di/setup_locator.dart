@@ -1,5 +1,6 @@
 // 📁 lib/setup_locator.dart
 import 'package:get_it/get_it.dart';
+import 'package:tournament_app/env/env.dart';
 import 'package:tournament_app/features/chat/services/support_chat_client.dart';
 import 'package:tournament_app/features/chat/store/support_chat_store.dart';
 import 'package:tournament_app/features/screens/auth/store/auth_store.dart';
@@ -12,7 +13,7 @@ import 'package:tournament_app/stores/theme_store.dart';
 final getIt = GetIt.instance;
 
 void setupLocator() {
-  getIt.registerLazySingleton(() => SupportChatClient('dukn7eu68wzr'));
+  getIt.registerLazySingleton(() => SupportChatClient(Env.config.streamKey));
   getIt.registerLazySingleton(() => SupportChatStore());
   getIt.registerSingleton<AppConfigStore>(AppConfigStore()..initConfig());
   getIt.registerSingleton<ThemeStore>(ThemeStore());

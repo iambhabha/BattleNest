@@ -29,13 +29,13 @@ mixin _$SupportChatStore on _SupportChatStore, Store {
       Atom(name: '_SupportChatStore.currentChannel', context: context);
 
   @override
-  Channel? get currentChannel {
+  InvalidType get currentChannel {
     _$currentChannelAtom.reportRead();
     return super.currentChannel;
   }
 
   @override
-  set currentChannel(Channel? value) {
+  set currentChannel(InvalidType value) {
     _$currentChannelAtom.reportWrite(value, super.currentChannel, () {
       super.currentChannel = value;
     });

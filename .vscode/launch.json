@@ -1,6 +1,6 @@
 {
   "name": "BattleNest",
   "type": "dart",
-  "flutterMode": "debug",
+  "flutterMode": "release",
   "args": [ "--no-enable-impeller"]
 }

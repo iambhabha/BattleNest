@@ -1,5 +1,6 @@
 import 'package:mobx/mobx.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
+import 'package:tournament_app/env/env.dart';
 
 import '../services/support_chat_client.dart';
 
@@ -8,7 +9,9 @@ part 'support_chat_store.g.dart';
 class SupportChatStore = _SupportChatStore with _$SupportChatStore;
 
 abstract class _SupportChatStore with Store {
-  final SupportChatClient supportClient = SupportChatClient('dukn7eu68wzr');
+  final SupportChatClient supportClient = SupportChatClient(
+    Env.config.streamKey,
+  );
 
   @observable
   bool isLoading = false;
@@ -24,27 +27,25 @@ abstract class _SupportChatStore with Store {
 
   @action
   Future<void> init(String userId) async {
-    setLoading(true);
+    try {
+      setLoading(true);
+      final client = supportClient.client;
+      final token = await supportClient.fetchStreamToken(userId);
 
-    // Only connect if the user is not already connected
-    if (supportClient.client.state.currentUser?.id != userId) {
-      try {
-        await supportClient.connectUser(userId);
-      } catch (e) {
-        print('Error connecting user: $e');
-        // handle or rethrow if needed
-      }
-    } else {
-      print('User $userId already connected, skipping connectUser');
+      await client.connectUser(User(id: userId, name: 'Support User'), token);
+
+      currentChannel = client.channel('messaging', id: 'support_$userId');
+
+      await currentChannel!.watch();
+
+      connected = true;
+    } catch (e) {
+      print('Error during chat init: $e');
+      connected = false;
+      currentChannel = null;
+    } finally {
+      setLoading(false);
     }
-
-    currentChannel = await supportClient.createSupportChannel(
-      userId,
-      'support_agent_1',
-    );
-
-    connected = true;
-    setLoading(false);
   }
 
   @action

@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
   static const List<Widget> _pages = <Widget>[
     DashBoard(),
     Center(child: Text('Events', style: TextStyle(color: Colors.white))),
-    SupportChatPage(userId: 'user123'),
+    SupportChatPage(userId: 'kapil_user'),
     Center(child: Text('Profile', style: TextStyle(color: Colors.white))),
   ];
 

@@ -21,4 +21,6 @@ abstract class BaseEnvConfig {
   String dropdownPath(String type) => '$tournamentDropdowns/$type';
 
   String get pathAppSetting => '$config/$_appSettings';
+  String get streamKey;
+  String get streamSecret;
 }
