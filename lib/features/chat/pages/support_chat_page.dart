@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:shimmer/shimmer.dart';
-import 'package:stream_chat_flutter/stream_chat_flutter.dart';
-import 'package:tournament_app/core/di/setup_locator.dart';
+import 'dart:convert';
 
-import '../store/support_chat_store.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 class SupportChatPage extends StatefulWidget {
   final String userId;
@@ -16,63 +14,84 @@ class SupportChatPage extends StatefulWidget {
 }
 
 class _SupportChatPageState extends State<SupportChatPage> {
-  final SupportChatStore store = getIt<SupportChatStore>();
+  late final StreamChatClient client;
+  Channel? currentChannel;
+  bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    store.init(widget.userId);
+    initChat();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Observer(
-      builder: (_) {
-        if (store.isLoading || store.currentChannel == null) {
-          return const _ShimmerLoadingScreen();
-        }
+  Future<String> fetchStreamToken(String userId) async {
+    final url = Uri.parse('http://192.168.1.34:5000/generate-token');
 
-        return StreamChat(
-          client: store.client,
-          child: StreamChannel(
-            channel: store.currentChannel!,
-            child: Scaffold(
-              appBar: const StreamChannelHeader(),
-              body: Column(
-                children: [
-                  Expanded(child: StreamMessageListView()),
-                  StreamMessageInput(),
-                ],
-              ),
-            ),
-          ),
-        );
+    final response = await http.post(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode({"userId": userId}),
+    );
+
+    print("Response status: ${response.statusCode}");
+    print("Response body: ${response.body}");
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body)["token"];
+    } else {
+      throw Exception("Failed to fetch token");
+    }
+  }
+
+  Future<void> initChat() async {
+    client = StreamChatClient('dukn7eu68wzr', logLevel: Level.INFO);
+    final token = await fetchStreamToken(widget.userId);
+    await client.connectUser(User(id: 'user123'), token);
+
+    await client.updateUser(
+      User(id: 'support_agent_1', extraData: {'name': 'Support Agent'}),
+    );
+
+    final channel = client.channel(
+      'messaging',
+      id: 'support_channel_user123',
+      extraData: {
+        'members': ['user123', 'support_agent_1'],
       },
     );
-  }
-}
 
-class _ShimmerLoadingScreen extends StatelessWidget {
-  const _ShimmerLoadingScreen();
+    await channel.watch();
+
+    await currentChannel!.watch();
+
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  @override
+  void dispose() {
+    client.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Loading Chat...")),
-      body: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Shimmer.fromColors(
-          baseColor: Colors.grey.shade300,
-          highlightColor: Colors.grey.shade100,
-          child: Column(
-            children: List.generate(6, (i) {
-              return Container(
-                margin: const EdgeInsets.symmetric(vertical: 8),
-                width: double.infinity,
-                height: 20,
-                color: Colors.white,
-              );
-            }),
+    if (isLoading || currentChannel == null) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    return StreamChat(
+      client: client,
+      child: StreamChannel(
+        channel: currentChannel!,
+        child: Scaffold(
+          appBar: const StreamChannelHeader(),
+          body: Column(
+            children: const [
+              Expanded(child: StreamMessageListView()),
+              StreamMessageInput(),
+            ],
           ),
         ),
       ),

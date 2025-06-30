@@ -12,8 +12,8 @@ import 'package:tournament_app/stores/theme_store.dart';
 final getIt = GetIt.instance;
 
 void setupLocator() {
-  getIt.registerLazySingleton(() => SupportChatClient('YOUR_STREAM_API_KEY'));
-  getIt.registerLazySingleton(() => SupportChatStore(getIt()));
+  getIt.registerLazySingleton(() => SupportChatClient('dukn7eu68wzr'));
+  getIt.registerLazySingleton(() => SupportChatStore());
   getIt.registerSingleton<AppConfigStore>(AppConfigStore()..initConfig());
   getIt.registerSingleton<ThemeStore>(ThemeStore());
   getIt.registerSingleton<AuthStore>(AuthStore()..init());
