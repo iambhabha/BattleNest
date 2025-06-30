@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:tournament_app/core/extensions/screen_size_extension.dart';
-import 'package:tournament_app/ui/screens/homepage/components/section_title.dart';
-import 'package:tournament_app/ui/screens/homepage/components/slider_block.dart';
-import 'package:tournament_app/ui/screens/homepage/components/tournament_card.dart';
-import 'package:tournament_app/ui/screens/homepage/components/upcoming_tournament_card.dart';
-import 'package:tournament_app/ui/screens/homepage/store/home_content_store.dart';
-import 'package:tournament_app/ui/widgets/common/x_scroll_deck.dart';
+import 'package:tournament_app/features/screens/homepage/components/section_title.dart';
+import 'package:tournament_app/features/screens/homepage/components/slider_block.dart';
+import 'package:tournament_app/features/screens/homepage/components/tournament_card.dart';
+import 'package:tournament_app/features/screens/homepage/components/upcoming_tournament_card.dart';
+import 'package:tournament_app/features/screens/homepage/store/home_content_store.dart';
+import 'package:tournament_app/features/widgets/common/x_scroll_deck.dart';
 
 class HomeTournamentView extends StatefulWidget {
   final HomeContentStore store;

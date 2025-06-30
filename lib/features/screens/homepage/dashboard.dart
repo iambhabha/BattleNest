@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:tournament_app/core/di/setup_locator.dart';
-import 'package:tournament_app/ui/screens/homepage/home_tournament_view.dart';
-import 'package:tournament_app/ui/screens/homepage/store/home_content_store.dart';
+import 'package:tournament_app/features/screens/homepage/home_tournament_view.dart';
+import 'package:tournament_app/features/screens/homepage/store/home_content_store.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({super.key});

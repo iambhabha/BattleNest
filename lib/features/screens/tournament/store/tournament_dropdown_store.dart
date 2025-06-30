@@ -1,12 +1,13 @@
-import 'package:mobx/mobx.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mobx/mobx.dart';
 import 'package:tournament_app/constants/firestore_paths.dart';
 import 'package:tournament_app/constants/tournament_dropdown_paths.dart';
-import 'package:tournament_app/ui/screens/tournament/models/dropdown_item.dart';
+import 'package:tournament_app/features/screens/tournament/models/dropdown_item.dart';
 
 part 'tournament_dropdown_store.g.dart';
 
-class TournamentDropdownStore = _TournamentDropdownStore with _$TournamentDropdownStore;
+class TournamentDropdownStore = _TournamentDropdownStore
+    with _$TournamentDropdownStore;
 
 abstract class _TournamentDropdownStore with Store {
   final _firestore = FirebaseFirestore.instance;
@@ -37,7 +38,10 @@ abstract class _TournamentDropdownStore with Store {
     ]);
   }
 
-  Future<void> _fetchDropdown(String type, ObservableList<DropdownItem> targetList) async {
+  Future<void> _fetchDropdown(
+    String type,
+    ObservableList<DropdownItem> targetList,
+  ) async {
     final snap =
         await _firestore
             .collection(FirestorePaths.dropdownPath(type))
@@ -45,6 +49,8 @@ abstract class _TournamentDropdownStore with Store {
             .orderBy('id')
             .get();
     targetList.clear();
-    targetList.addAll(snap.docs.map((doc) => DropdownItem.fromJson(doc.data())));
+    targetList.addAll(
+      snap.docs.map((doc) => DropdownItem.fromJson(doc.data())),
+    );
   }
 }

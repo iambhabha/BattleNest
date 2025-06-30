@@ -13,12 +13,12 @@ import 'package:tournament_app/constants/light_theme.dart';
 import 'package:tournament_app/core/di/setup_locator.dart';
 import 'package:tournament_app/core/utils/app_logger.dart';
 import 'package:tournament_app/env/env.dart';
+import 'package:tournament_app/features/screens/auth/store/auth_store.dart';
+import 'package:tournament_app/features/screens/homepage/homepage_screen.dart';
+import 'package:tournament_app/features/screens/homepage/store/home_navigation_view_model.dart';
+import 'package:tournament_app/features/screens/tournament/create_tournament_screen.dart';
 import 'package:tournament_app/services/app_localizations.dart';
 import 'package:tournament_app/stores/theme_store.dart';
-import 'package:tournament_app/ui/screens/auth/store/auth_store.dart';
-import 'package:tournament_app/ui/screens/homepage/homepage_screen.dart';
-import 'package:tournament_app/ui/screens/homepage/store/home_navigation_view_model.dart';
-import 'package:tournament_app/ui/screens/tournament/create_tournament_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,11 +37,11 @@ Future<void> main() async {
 
   setupLocator();
 
-  runApp(const MyApp());
+  runApp(const RootApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class RootApp extends StatelessWidget {
+  const RootApp({super.key});
 
   @override
   Widget build(BuildContext context) {

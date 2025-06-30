@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tournament_app/core/extensions/screen_size_extension.dart';
+import 'package:tournament_app/features/screens/auth/store/auth_store.dart';
 import 'package:tournament_app/services/app_localizations.dart';
 import 'package:tournament_app/stores/theme_store.dart';
-import 'package:tournament_app/ui/screens/auth/store/auth_store.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

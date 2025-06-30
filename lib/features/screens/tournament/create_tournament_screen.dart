@@ -3,11 +3,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tournament_app/constants/app_color.dart';
 import 'package:tournament_app/core/extensions/screen_size_extension.dart';
-import 'package:tournament_app/ui/screens/tournament/store/tournament_dropdown_store.dart';
-import 'package:tournament_app/ui/widgets/common/create_tournament_shimmer.dart';
-import 'package:tournament_app/ui/widgets/common/text_form_field.dart';
-import 'package:tournament_app/ui/widgets/gradient_button.dart';
-import 'package:tournament_app/ui/widgets/common/x_app_bar.dart';
+import 'package:tournament_app/features/screens/tournament/store/tournament_dropdown_store.dart';
+import 'package:tournament_app/features/widgets/common/create_tournament_shimmer.dart';
+import 'package:tournament_app/features/widgets/common/text_form_field.dart';
+import 'package:tournament_app/features/widgets/common/x_app_bar.dart';
+import 'package:tournament_app/features/widgets/gradient_button.dart';
 
 class CreateTournamentScreen extends StatefulWidget {
   const CreateTournamentScreen({super.key});
@@ -49,10 +49,22 @@ class _CreateTournamentScreenState extends State<CreateTournamentScreen> {
               }
 
               // Set defaults if not already set
-              selectedGameMode = selectedGameMode.isEmpty ? dropdownStore.gameModes.first.title : selectedGameMode;
-              selectedCapacity = selectedCapacity.isEmpty ? dropdownStore.capacities.first.title : selectedCapacity;
-              selectedEntryFee = selectedEntryFee.isEmpty ? dropdownStore.entryFees.first.title : selectedEntryFee;
-              selectedCurrency = selectedCurrency.isEmpty ? dropdownStore.currencies.first.title : selectedCurrency;
+              selectedGameMode =
+                  selectedGameMode.isEmpty
+                      ? dropdownStore.gameModes.first.title
+                      : selectedGameMode;
+              selectedCapacity =
+                  selectedCapacity.isEmpty
+                      ? dropdownStore.capacities.first.title
+                      : selectedCapacity;
+              selectedEntryFee =
+                  selectedEntryFee.isEmpty
+                      ? dropdownStore.entryFees.first.title
+                      : selectedEntryFee;
+              selectedCurrency =
+                  selectedCurrency.isEmpty
+                      ? dropdownStore.currencies.first.title
+                      : selectedCurrency;
 
               return SingleChildScrollView(
                 child: Column(
@@ -63,7 +75,10 @@ class _CreateTournamentScreenState extends State<CreateTournamentScreen> {
                     16.hh,
 
                     _buildLabel("Tournament's Name"),
-                    _buildTextField("Custom Tournament Name", _tournamentNameController),
+                    _buildTextField(
+                      "Custom Tournament Name",
+                      _tournamentNameController,
+                    ),
                     16.hh,
 
                     Row(
@@ -72,7 +87,9 @@ class _CreateTournamentScreenState extends State<CreateTournamentScreen> {
                           child: _buildDropdownField(
                             "Game Mode",
                             selectedGameMode,
-                            dropdownStore.gameModes.map((e) => e.title).toList(),
+                            dropdownStore.gameModes
+                                .map((e) => e.title)
+                                .toList(),
                             (val) => setState(() => selectedGameMode = val!),
                           ),
                         ),
@@ -81,7 +98,9 @@ class _CreateTournamentScreenState extends State<CreateTournamentScreen> {
                           child: _buildDropdownField(
                             "Capacity",
                             selectedCapacity,
-                            dropdownStore.capacities.map((e) => e.title).toList(),
+                            dropdownStore.capacities
+                                .map((e) => e.title)
+                                .toList(),
                             (val) => setState(() => selectedCapacity = val!),
                           ),
                         ),
@@ -94,7 +113,9 @@ class _CreateTournamentScreenState extends State<CreateTournamentScreen> {
                           child: _buildDropdownField(
                             "Entry Fee",
                             selectedEntryFee,
-                            dropdownStore.entryFees.map((e) => e.title).toList(),
+                            dropdownStore.entryFees
+                                .map((e) => e.title)
+                                .toList(),
                             (val) => setState(() => selectedEntryFee = val!),
                           ),
                         ),
@@ -103,7 +124,9 @@ class _CreateTournamentScreenState extends State<CreateTournamentScreen> {
                           child: _buildDropdownField(
                             "Currency",
                             selectedCurrency,
-                            dropdownStore.currencies.map((e) => e.title).toList(),
+                            dropdownStore.currencies
+                                .map((e) => e.title)
+                                .toList(),
                             (val) => setState(() => selectedCurrency = val!),
                           ),
                         ),
@@ -123,7 +146,9 @@ class _CreateTournamentScreenState extends State<CreateTournamentScreen> {
                           width: 100,
                           child: _buildDropdownButton(
                             selectedCurrency,
-                            dropdownStore.currencies.map((e) => e.title).toList(),
+                            dropdownStore.currencies
+                                .map((e) => e.title)
+                                .toList(),
                             (val) => setState(() => selectedCurrency = val!),
                           ),
                         ),
@@ -170,11 +195,19 @@ class _CreateTournamentScreenState extends State<CreateTournamentScreen> {
   ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [_buildLabel(label), 4.hh, _buildDropdownButton(selectedValue, options, onChanged)],
+      children: [
+        _buildLabel(label),
+        4.hh,
+        _buildDropdownButton(selectedValue, options, onChanged),
+      ],
     );
   }
 
-  Widget _buildDropdownButton(String selectedValue, List<String> options, void Function(String?) onChanged) {
+  Widget _buildDropdownButton(
+    String selectedValue,
+    List<String> options,
+    void Function(String?) onChanged,
+  ) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(

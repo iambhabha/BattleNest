@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tournament_app/constants/app_color.dart';
 import 'package:tournament_app/core/extensions/screen_size_extension.dart';
-import 'package:tournament_app/ui/screens/homepage/components/section_title.dart';
-import 'package:tournament_app/ui/widgets/common/c_image.dart';
+import 'package:tournament_app/features/screens/homepage/components/section_title.dart';
+import 'package:tournament_app/features/widgets/common/c_image.dart';
 
 class UpcomingTournamentCard extends StatelessWidget {
   const UpcomingTournamentCard({super.key});

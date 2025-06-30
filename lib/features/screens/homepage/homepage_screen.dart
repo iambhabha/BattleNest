@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:tournament_app/constants/app_color.dart';
-import 'package:tournament_app/ui/screens/homepage/dashboard.dart';
-import 'package:tournament_app/ui/screens/homepage/store/home_navigation_view_model.dart';
-import 'package:tournament_app/ui/widgets/common/home_bottom_nav_bar.dart';
-import 'package:tournament_app/ui/widgets/common/x_app_bar.dart';
+import 'package:tournament_app/features/chat/pages/support_chat_page.dart';
+import 'package:tournament_app/features/screens/homepage/dashboard.dart';
+import 'package:tournament_app/features/screens/homepage/store/home_navigation_view_model.dart';
+import 'package:tournament_app/features/widgets/common/home_bottom_nav_bar.dart';
+import 'package:tournament_app/features/widgets/common/x_app_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   final HomeNavigationViewModel navigationViewModel;
@@ -15,7 +16,7 @@ class HomeScreen extends StatefulWidget {
   static const List<Widget> _pages = <Widget>[
     DashBoard(),
     Center(child: Text('Events', style: TextStyle(color: Colors.white))),
-    Center(child: Text('Chat', style: TextStyle(color: Colors.white))),
+    SupportChatPage(userId: 'user123'),
     Center(child: Text('Profile', style: TextStyle(color: Colors.white))),
   ];
 

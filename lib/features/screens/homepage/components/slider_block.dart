@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:tournament_app/constants/app_color.dart';
-import 'package:tournament_app/ui/widgets/common/c_image.dart';
+import 'package:tournament_app/features/widgets/common/c_image.dart';
 
 /// Model representing a single tournament banner item.
 class TournamentBannerModel {
