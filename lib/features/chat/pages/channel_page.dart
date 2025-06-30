@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 class ChannelPage extends StatelessWidget {
-  const ChannelPage({super.key});
+  final String? title;
+  const ChannelPage({super.key, this.title});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const StreamChannelHeader(
+      appBar: StreamChannelHeader(
+        title: title != null ? Text(title!) : null,
         showBackButton: false,
         showTypingIndicator: true,
       ),

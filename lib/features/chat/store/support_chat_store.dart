@@ -17,7 +17,7 @@ abstract class _SupportChatStore with Store {
   bool isLoading = false;
 
   @observable
-  Channel? currentChannel;
+  Channel? currentChannel; // leave the field as is
 
   @observable
   bool connected = false;

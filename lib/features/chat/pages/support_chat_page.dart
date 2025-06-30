@@ -49,7 +49,7 @@ class _SupportChatPageState extends State<SupportChatPage> {
           client: _supportChatStore.client,
           child: StreamChannel(
             channel: _supportChatStore.currentChannel!,
-            child: const ChannelPage(),
+            child: ChannelPage(title: 'Support Chat'),
           ),
         );
       },
