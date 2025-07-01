@@ -1,6 +1,14 @@
 {
-  "name": "BattleNest",
-  "type": "dart",
-  "flutterMode": "release",
-  "args": [ "--no-enable-impeller"]
-}
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "BattleNest",
+            "request": "launch",
+            "type": "dart",
+            "toolArgs": [
+                "--no-enable-impeller"
+
+            ]
+        },
+    ]
+  }

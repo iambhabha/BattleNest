@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:tournament_app/constants/app_color.dart';
-import 'package:tournament_app/features/chat/pages/support_chat_page.dart';
-import 'package:tournament_app/features/screens/homepage/dashboard.dart';
-import 'package:tournament_app/features/screens/homepage/store/home_navigation_view_model.dart';
+import 'package:tournament_app/features/drawer/x_drawer.dart';
+import 'package:tournament_app/features/homepage/dashboard.dart';
+import 'package:tournament_app/features/homepage/store/home_navigation_view_model.dart';
 import 'package:tournament_app/features/widgets/common/home_bottom_nav_bar.dart';
 import 'package:tournament_app/features/widgets/common/x_app_bar.dart';
 
@@ -16,7 +15,6 @@ class HomeScreen extends StatefulWidget {
   static const List<Widget> _pages = <Widget>[
     DashBoard(),
     Center(child: Text('Events', style: TextStyle(color: Colors.white))),
-    SupportChatPage(userId: 'kapil_user'),
     Center(child: Text('Profile', style: TextStyle(color: Colors.white))),
   ];
 
@@ -29,9 +27,24 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF0E1220),
-      appBar: const XAppBar(
+      drawer: XDrawer(
+        userName: "John Doe",
+        email: "john@example.com",
+        onLogout: () {
+          // Handle logout
+        },
+        isDarkMode: true,
+        onThemeToggle: (bool value) {},
+      ),
+      appBar: XAppBar(
         title: 'ClashZone',
-        leading: Icon(Icons.menu, color: ColorSchemeX.titleColor),
+        leading: Builder(
+          builder:
+              (context) => IconButton(
+                icon: const Icon(Icons.menu),
+                onPressed: () => Scaffold.of(context).openDrawer(),
+              ),
+        ),
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 12.0),

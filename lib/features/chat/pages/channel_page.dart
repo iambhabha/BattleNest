@@ -9,9 +9,9 @@ class ChannelPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: StreamChannelHeader(
+        centerTitle: true,
         title: title != null ? Text(title!) : null,
         showBackButton: false,
-        showTypingIndicator: true,
       ),
       body: Column(
         children: const <Widget>[

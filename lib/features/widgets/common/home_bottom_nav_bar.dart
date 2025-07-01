@@ -24,32 +24,72 @@ class HomeBottomNavBar extends StatelessWidget {
           ),
         ],
       ),
-      child: BottomNavigationBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: ColorSchemeX.bottomNavBarSelect,
-        unselectedItemColor: const Color(0xFF6C7493),
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        currentIndex: currentIndex,
-        onTap: onTap,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home, size: 30), label: ''),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.emoji_events, size: 30),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat_bubble_outline, size: 30),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline, size: 30),
-            label: '',
-          ),
-        ],
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: List.generate(_navItems.length, (index) {
+          final item = _navItems[index];
+          final isSelected = index == currentIndex;
+
+          return GestureDetector(
+            onTap: () => onTap(index),
+            behavior: HitTestBehavior.opaque,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              decoration: BoxDecoration(
+                color:
+                    isSelected
+                        ? Colors.white.withOpacity(0.1)
+                        : Colors.transparent,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  AnimatedScale(
+                    scale: isSelected ? 1.2 : 1.0,
+                    duration: const Duration(milliseconds: 250),
+                    child: Icon(
+                      item.icon,
+                      size: 28,
+                      color:
+                          isSelected
+                              ? ColorSchemeX.bottomNavBarSelect
+                              : const Color(0xFF6C7493),
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  AnimatedOpacity(
+                    duration: const Duration(milliseconds: 250),
+                    opacity: isSelected ? 1.0 : 0.0,
+                    child: Container(
+                      width: 6,
+                      height: 6,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: ColorSchemeX.bottomNavBarSelect,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }),
       ),
     );
   }
 }
+
+class _NavItem {
+  final IconData icon;
+  const _NavItem(this.icon);
+}
+
+const List<_NavItem> _navItems = [
+  _NavItem(Icons.home),
+  _NavItem(Icons.emoji_events),
+  _NavItem(Icons.chat_bubble_outline),
+  _NavItem(Icons.person_outline),
+];

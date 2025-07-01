@@ -1,9 +1,6 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:tournament_app/env/base_env_config.dart';
 
-final apiUrl = dotenv.env['API_URL'];
-final apiKey = dotenv.env['API_KEY'];
-
 class DevConfig extends BaseEnvConfig {
   @override
   String get envKey => 'dev_';

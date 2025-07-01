@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
@@ -25,6 +26,7 @@ class SupportChatClient {
   }
 
   Future<String> fetchStreamToken(String userId) async {
+    return dotenv.env['STREAM_TOKEN'] ?? '';
     final url = Uri.parse('http://192.168.1.34:5000/generate-token');
 
     final response = await http.post(

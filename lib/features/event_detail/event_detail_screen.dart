@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tournament_app/core/utils/app_logger.dart';
 
-import '../../widgets/gradient_button.dart';
+import '../widgets/gradient_button.dart';
 
 class EventDetailScreen extends StatelessWidget {
   final String eventId; // Firestore ID if needed

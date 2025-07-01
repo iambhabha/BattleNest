@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:tournament_app/core/extensions/screen_size_extension.dart';
-import 'package:tournament_app/features/screens/homepage/components/section_title.dart';
-import 'package:tournament_app/features/screens/homepage/components/slider_block.dart';
-import 'package:tournament_app/features/screens/homepage/components/tournament_card.dart';
-import 'package:tournament_app/features/screens/homepage/components/upcoming_tournament_card.dart';
-import 'package:tournament_app/features/screens/homepage/store/home_content_store.dart';
+import 'package:tournament_app/features/homepage/components/section_title.dart';
+import 'package:tournament_app/features/homepage/components/slider_block.dart';
+import 'package:tournament_app/features/homepage/components/tournament_card.dart';
+import 'package:tournament_app/features/homepage/components/upcoming_tournament_card.dart';
+import 'package:tournament_app/features/homepage/store/home_content_store.dart';
 import 'package:tournament_app/features/widgets/common/x_scroll_deck.dart';
 
 class HomeTournamentView extends StatefulWidget {

@@ -1,3 +1,4 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:tournament_app/env/base_env_config.dart';
 
 class StagingConfig extends BaseEnvConfig {
@@ -5,9 +6,8 @@ class StagingConfig extends BaseEnvConfig {
   String get envKey => 'staging_';
 
   @override
-  String get streamKey => 'dukn7eu68wzr';
+  String get streamKey => dotenv.env['STREAM_API'] ?? '';
 
   @override
-  String get streamSecret =>
-      'rbwy4f5jfcu9gccncvhzsm33qfwzs2n7u58u974n4fv8z5azbduc9p6yn8dygxkp';
+  String get streamSecret => dotenv.env['STREAM_SECRET'] ?? '';
 }

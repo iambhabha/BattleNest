@@ -14,10 +14,10 @@ import 'package:tournament_app/constants/light_theme.dart';
 import 'package:tournament_app/core/di/setup_locator.dart';
 import 'package:tournament_app/core/utils/app_logger.dart';
 import 'package:tournament_app/env/env.dart';
-import 'package:tournament_app/features/screens/auth/store/auth_store.dart';
-import 'package:tournament_app/features/screens/homepage/homepage_screen.dart';
-import 'package:tournament_app/features/screens/homepage/store/home_navigation_view_model.dart';
-import 'package:tournament_app/features/screens/tournament/create_tournament_screen.dart';
+import 'package:tournament_app/features/auth/store/auth_store.dart';
+import 'package:tournament_app/features/homepage/homepage_screen.dart';
+import 'package:tournament_app/features/homepage/store/home_navigation_view_model.dart';
+import 'package:tournament_app/features/tournament/create_tournament_screen.dart';
 import 'package:tournament_app/services/app_localizations.dart';
 import 'package:tournament_app/stores/theme_store.dart';
 
