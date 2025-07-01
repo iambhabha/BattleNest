@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tournament_app/features/chat/pages/support_chat_page.dart';
 
 class XDrawer extends StatefulWidget {
   final String userName;
@@ -54,6 +55,16 @@ class _XDrawerState extends State<XDrawer> {
                     route: '/chat',
                     context: context,
                     badgeCount: 3,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder:
+                              (context) =>
+                                  const SupportChatPage(userId: 'kapil_user'),
+                        ),
+                      );
+                    },
                   ),
                   _navItem(
                     icon: Icons.notifications,
