@@ -29,76 +29,83 @@ class _XDrawerState extends State<XDrawer> {
     final color = widget.isDarkMode ? Colors.white : Colors.black87;
     final bgColor = widget.isDarkMode ? const Color(0xFF0F1320) : Colors.white;
 
-    return SafeArea(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildHeader(color),
-          const Divider(),
-          Expanded(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: [
-                _navItem(icon: Icons.home, label: 'Home', color: color, route: '/home', context: context),
-                _navItem(
-                  icon: Icons.chat_bubble_outline,
-                  label: 'Chat',
-                  color: color,
-                  // route: '/chat',
-                  context: context,
-                  badgeCount: 3,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SupportChatPage(userId: '9a5fd02e-b77a-4cb2-a820-37a1fa61e6cf'),
-                      ),
-                    );
-                  },
-                ),
-                _navItem(
-                  icon: Icons.notifications,
-                  label: 'Notifications',
-                  color: color,
-                  route: '/notifications',
-                  context: context,
-                  badgeCount: 5,
-                ),
+    return Drawer(
+      backgroundColor: bgColor,
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildHeader(color),
+            const Divider(),
+            Expanded(
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  _navItem(icon: Icons.home, label: 'Home', color: color, route: '/home', context: context),
+                  _navItem(
+                    icon: Icons.chat_bubble_outline,
+                    label: 'Chat',
+                    color: color,
+                    // route: '/chat',
+                    context: context,
+                    badgeCount: 3,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SupportChatPage(userId: '9a5fd02e-b77a-4cb2-a820-37a1fa61e6cf'),
+                        ),
+                      );
+                    },
+                  ),
+                  _navItem(
+                    icon: Icons.notifications,
+                    label: 'Notifications',
+                    color: color,
+                    route: '/notifications',
+                    context: context,
+                    badgeCount: 5,
+                  ),
 
-                // Collapsible Settings Menu
-                _expandableNavItem(
-                  icon: Icons.settings_outlined,
-                  label: 'Settings',
-                  color: color,
-                  expanded: settingsExpanded,
-                  onTap: () {
-                    setState(() {
-                      settingsExpanded = !settingsExpanded;
-                    });
-                  },
-                ),
-                if (settingsExpanded) ...[
-                  _submenuItem(label: 'Account', color: color, onTap: () => Navigator.pushNamed(context, '/account')),
-                  _submenuItem(label: 'Security', color: color, onTap: () => Navigator.pushNamed(context, '/security')),
+                  // Collapsible Settings Menu
+                  _expandableNavItem(
+                    icon: Icons.settings_outlined,
+                    label: 'Settings',
+                    color: color,
+                    expanded: settingsExpanded,
+                    onTap: () {
+                      setState(() {
+                        settingsExpanded = !settingsExpanded;
+                      });
+                    },
+                  ),
+                  if (settingsExpanded) ...[
+                    _submenuItem(label: 'Account', color: color, onTap: () => Navigator.pushNamed(context, '/account')),
+                    _submenuItem(
+                      label: 'Security',
+                      color: color,
+                      onTap: () => Navigator.pushNamed(context, '/security'),
+                    ),
+                  ],
+
+                  _navItem(icon: Icons.help_outline, label: 'Help', color: color, route: '/help', context: context),
+
+                  const SizedBox(height: 20),
+                  _themeToggleSwitch(color),
                 ],
-
-                _navItem(icon: Icons.help_outline, label: 'Help', color: color, route: '/help', context: context),
-
-                const SizedBox(height: 20),
-                _themeToggleSwitch(color),
-              ],
+              ),
             ),
-          ),
-          const Divider(),
-          _navItem(
-            icon: Icons.logout,
-            label: 'Logout',
-            color: Colors.redAccent,
-            onTap: widget.onLogout,
-            context: context,
-          ),
-          const SizedBox(height: 20),
-        ],
+            const Divider(),
+            _navItem(
+              icon: Icons.logout,
+              label: 'Logout',
+              color: Colors.redAccent,
+              onTap: widget.onLogout,
+              context: context,
+            ),
+            const SizedBox(height: 20),
+          ],
+        ),
       ),
     );
   }
