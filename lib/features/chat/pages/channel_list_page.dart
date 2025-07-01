@@ -32,10 +32,7 @@ class _ChannelListPageState extends State<ChannelListPage> {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) {
-                return StreamChannel(
-                  channel: channel,
-                  child: const ChannelPage(),
-                );
+                return StreamChannel(channel: channel, child: const ChannelPage());
               },
             ),
           );

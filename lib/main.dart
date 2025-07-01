@@ -50,15 +50,15 @@ class RootApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeStore = GetIt.I<ThemeStore>();
+    // final themeStore = GetIt.I<ThemeStore>();
     final authStore = GetIt.I<AuthStore>();
-    final streamClient = StreamChatClient(Env.config.streamKey, logLevel: Level.INFO);
+    final streamClient = GetIt.I<SupportChatClient>();
 
     return MaterialApp(
       title: 'Tournament App',
       theme: lightTheme,
       darkTheme: darkTheme,
-      themeMode: themeStore.themeMode,
+      themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
         AppLocalizationsDelegate(),
@@ -70,7 +70,7 @@ class RootApp extends StatelessWidget {
       locale: const Locale('en'),
       builder: (context, child) {
         ScreenUtil.init(context, designSize: const Size(360, 690));
-        return StreamChat(client: streamClient, child: child!);
+        return StreamChat(client: streamClient.client, child: child!);
       },
       home: Observer(
         builder: (_) {

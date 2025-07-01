@@ -40,17 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
         title: 'ClashZone',
         leading: Builder(
           builder:
-              (context) => IconButton(
-                icon: const Icon(Icons.menu),
-                onPressed: () => Scaffold.of(context).openDrawer(),
-              ),
+              (context) => IconButton(icon: const Icon(Icons.menu), onPressed: () => Scaffold.of(context).openDrawer()),
         ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 12.0),
-            child: Icon(Icons.login),
-          ),
-        ],
+        actions: [Padding(padding: EdgeInsets.only(right: 12.0), child: Icon(Icons.login))],
       ),
       bottomNavigationBar: Observer(
         builder:
@@ -59,11 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
               onTap: widget.navigationViewModel.updateTabIndex,
             ),
       ),
-      body: Observer(
-        builder:
-            (_) =>
-                HomeScreen._pages[widget.navigationViewModel.selectedTabIndex],
-      ),
+      body: Observer(builder: (_) => HomeScreen._pages[widget.navigationViewModel.selectedTabIndex]),
     );
   }
 }

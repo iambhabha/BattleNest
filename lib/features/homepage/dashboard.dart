@@ -22,8 +22,6 @@ class _DashBoardState extends State<DashBoard> {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(
-      builder: (_) => HomeTournamentView(store: homeContentStore),
-    );
+    return Observer(builder: (_) => HomeTournamentView(store: homeContentStore));
   }
 }

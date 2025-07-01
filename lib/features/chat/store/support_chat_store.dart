@@ -1,3 +1,4 @@
+import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'package:tournament_app/env/env.dart';
@@ -9,8 +10,6 @@ part 'support_chat_store.g.dart';
 class SupportChatStore = _SupportChatStore with _$SupportChatStore;
 
 abstract class _SupportChatStore with Store {
-  final SupportChatClient supportClient = SupportChatClient(Env.config.streamKey);
-
   @observable
   bool isLoading = false;
 
@@ -23,22 +22,30 @@ abstract class _SupportChatStore with Store {
   @action
   void setLoading(bool value) => isLoading = value;
 
+  final streamClient = GetIt.I<SupportChatClient>();
+
   @action
   Future<void> init(String userId) async {
     try {
+      final streamClient = GetIt.I<SupportChatClient>();
       setLoading(true);
 
-      final client = supportClient.client;
-      final userToken = await supportClient.fetchStreamToken(userId);
-
+      final userToken = await streamClient.fetchStreamToken(userId);
       // This automatically creates the user in dev mode
-      await client.connectUser(
-        User(id: userId, name: 'User $userId'),
+      await streamClient.client.connectUser(
+        User(
+          id: userId,
+          name: 'Kapil Sharma',
+          image:
+              'https://image.api.playstation.com/vulcan/ap/rnd/202308/1722/15f4ab1e0fe6a37609b164362a653c0e5bcee98a861d0f10.png',
+          online: true,
+          role: 'user',
+        ),
         userToken, // This must be a dev token or valid backend-generated token
       );
 
       // Now create or get the channel
-      currentChannel = client.channel(
+      currentChannel = streamClient.client.channel(
         'messaging',
         id: 'support_$userId',
         extraData: {
@@ -59,10 +66,10 @@ abstract class _SupportChatStore with Store {
 
   @action
   Future<void> dispose() async {
-    await supportClient.disconnectUser();
+    await streamClient.disconnectUser();
     connected = false;
     currentChannel = null;
   }
 
-  StreamChatClient get client => supportClient.client;
+  StreamChatClient get client => streamClient.client;
 }
