@@ -19,8 +19,14 @@ abstract class _SupportChatStore with Store {
   @observable
   bool connected = false;
 
+  @observable
+  bool showTypingIndicator = false;
+
   @action
   void setLoading(bool value) => isLoading = value;
+
+  @action
+  void setTyping(bool value) => showTypingIndicator = value;
 
   final streamClient = GetIt.I<SupportChatClient>();
 
@@ -55,6 +61,14 @@ abstract class _SupportChatStore with Store {
 
       await currentChannel?.watch();
       connected = true;
+      // Listen for typing events
+      currentChannel?.on('typing.start').listen((event) {
+        setTyping(true);
+      });
+
+      currentChannel?.on('typing.stop').listen((event) {
+        setTyping(true);
+      });
     } catch (e) {
       print('Error during chat init: $e');
       connected = false;

@@ -57,6 +57,22 @@ mixin _$SupportChatStore on _SupportChatStore, Store {
     });
   }
 
+  late final _$showTypingIndicatorAtom =
+      Atom(name: '_SupportChatStore.showTypingIndicator', context: context);
+
+  @override
+  bool get showTypingIndicator {
+    _$showTypingIndicatorAtom.reportRead();
+    return super.showTypingIndicator;
+  }
+
+  @override
+  set showTypingIndicator(bool value) {
+    _$showTypingIndicatorAtom.reportWrite(value, super.showTypingIndicator, () {
+      super.showTypingIndicator = value;
+    });
+  }
+
   late final _$initAsyncAction =
       AsyncAction('_SupportChatStore.init', context: context);
 
@@ -88,11 +104,23 @@ mixin _$SupportChatStore on _SupportChatStore, Store {
   }
 
   @override
+  void setTyping(bool value) {
+    final _$actionInfo = _$_SupportChatStoreActionController.startAction(
+        name: '_SupportChatStore.setTyping');
+    try {
+      return super.setTyping(value);
+    } finally {
+      _$_SupportChatStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isLoading: ${isLoading},
 currentChannel: ${currentChannel},
-connected: ${connected}
+connected: ${connected},
+showTypingIndicator: ${showTypingIndicator}
     ''';
   }
 }
