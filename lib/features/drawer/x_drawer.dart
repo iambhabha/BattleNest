@@ -41,27 +41,19 @@ class _XDrawerState extends State<XDrawer> {
               child: ListView(
                 padding: EdgeInsets.zero,
                 children: [
-                  _navItem(
-                    icon: Icons.home,
-                    label: 'Home',
-                    color: color,
-                    route: '/home',
-                    context: context,
-                  ),
+                  _navItem(icon: Icons.home, label: 'Home', color: color, route: '/home', context: context),
                   _navItem(
                     icon: Icons.chat_bubble_outline,
                     label: 'Chat',
                     color: color,
-                    route: '/chat',
+                    // route: '/chat',
                     context: context,
                     badgeCount: 3,
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder:
-                              (context) =>
-                                  const SupportChatPage(userId: 'kapil_user'),
+                          builder: (context) => const SupportChatPage(userId: '9a5fd02e-b77a-4cb2-a820-37a1fa61e6cf'),
                         ),
                       );
                     },
@@ -88,11 +80,7 @@ class _XDrawerState extends State<XDrawer> {
                     },
                   ),
                   if (settingsExpanded) ...[
-                    _submenuItem(
-                      label: 'Account',
-                      color: color,
-                      onTap: () => Navigator.pushNamed(context, '/account'),
-                    ),
+                    _submenuItem(label: 'Account', color: color, onTap: () => Navigator.pushNamed(context, '/account')),
                     _submenuItem(
                       label: 'Security',
                       color: color,
@@ -100,13 +88,7 @@ class _XDrawerState extends State<XDrawer> {
                     ),
                   ],
 
-                  _navItem(
-                    icon: Icons.help_outline,
-                    label: 'Help',
-                    color: color,
-                    route: '/help',
-                    context: context,
-                  ),
+                  _navItem(icon: Icons.help_outline, label: 'Help', color: color, route: '/help', context: context),
 
                   const SizedBox(height: 20),
                   _themeToggleSwitch(color),
@@ -133,28 +115,15 @@ class _XDrawerState extends State<XDrawer> {
       padding: const EdgeInsets.all(20),
       child: Row(
         children: [
-          const CircleAvatar(
-            radius: 30,
-            backgroundImage: AssetImage('assets/images/avatar.png'),
-          ),
+          const CircleAvatar(radius: 30),
           const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  widget.userName,
-                  style: TextStyle(
-                    color: color,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                Text(widget.userName, style: TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 4),
-                Text(
-                  widget.email,
-                  style: TextStyle(color: color.withOpacity(0.6), fontSize: 14),
-                ),
+                Text(widget.email, style: TextStyle(color: color.withOpacity(0.6), fontSize: 14)),
               ],
             ),
           ),
@@ -184,20 +153,12 @@ class _XDrawerState extends State<XDrawer> {
           children: [
             Icon(icon, color: color),
             const SizedBox(width: 16),
-            Expanded(
-              child: Text(label, style: TextStyle(color: color, fontSize: 16)),
-            ),
+            Expanded(child: Text(label, style: TextStyle(color: color, fontSize: 16))),
             if (badgeCount > 0)
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                decoration: BoxDecoration(
-                  color: Colors.redAccent,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Text(
-                  '$badgeCount',
-                  style: const TextStyle(color: Colors.white, fontSize: 12),
-                ),
+                decoration: BoxDecoration(color: Colors.redAccent, borderRadius: BorderRadius.circular(12)),
+                child: Text('$badgeCount', style: const TextStyle(color: Colors.white, fontSize: 12)),
               ),
           ],
         ),
@@ -220,24 +181,15 @@ class _XDrawerState extends State<XDrawer> {
           children: [
             Icon(icon, color: color),
             const SizedBox(width: 16),
-            Expanded(
-              child: Text(label, style: TextStyle(color: color, fontSize: 16)),
-            ),
-            Icon(
-              expanded ? Icons.expand_less : Icons.expand_more,
-              color: color,
-            ),
+            Expanded(child: Text(label, style: TextStyle(color: color, fontSize: 16))),
+            Icon(expanded ? Icons.expand_less : Icons.expand_more, color: color),
           ],
         ),
       ),
     );
   }
 
-  Widget _submenuItem({
-    required String label,
-    required Color color,
-    required VoidCallback onTap,
-  }) {
+  Widget _submenuItem({required String label, required Color color, required VoidCallback onTap}) {
     return Padding(
       padding: const EdgeInsets.only(left: 72),
       child: ListTile(
@@ -253,10 +205,7 @@ class _XDrawerState extends State<XDrawer> {
       value: widget.isDarkMode,
       onChanged: widget.onThemeToggle,
       title: Text('Dark Mode', style: TextStyle(color: color)),
-      secondary: Icon(
-        widget.isDarkMode ? Icons.dark_mode : Icons.light_mode,
-        color: color,
-      ),
+      secondary: Icon(widget.isDarkMode ? Icons.dark_mode : Icons.light_mode, color: color),
       activeColor: Colors.amber,
     );
   }

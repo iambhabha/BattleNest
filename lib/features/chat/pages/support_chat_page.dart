@@ -47,10 +47,7 @@ class _SupportChatPageState extends State<SupportChatPage> {
 
         return StreamChat(
           client: _supportChatStore.client,
-          child: StreamChannel(
-            channel: _supportChatStore.currentChannel!,
-            child: ChannelPage(title: 'Support Chat'),
-          ),
+          child: StreamChannel(channel: _supportChatStore.currentChannel!, child: ChannelPage(title: 'Support Chat')),
         );
       },
     );

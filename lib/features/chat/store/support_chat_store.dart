@@ -9,9 +9,7 @@ part 'support_chat_store.g.dart';
 class SupportChatStore = _SupportChatStore with _$SupportChatStore;
 
 abstract class _SupportChatStore with Store {
-  final SupportChatClient supportClient = SupportChatClient(
-    Env.config.streamKey,
-  );
+  final SupportChatClient supportClient = SupportChatClient(Env.config.streamKey);
 
   @observable
   bool isLoading = false;
@@ -29,15 +27,26 @@ abstract class _SupportChatStore with Store {
   Future<void> init(String userId) async {
     try {
       setLoading(true);
+
       final client = supportClient.client;
-      final token = await supportClient.fetchStreamToken(userId);
+      final userToken = await supportClient.fetchStreamToken(userId);
 
-      await client.connectUser(User(id: userId, name: 'Support User'), token);
+      // This automatically creates the user in dev mode
+      await client.connectUser(
+        User(id: userId, name: 'User $userId'),
+        userToken, // This must be a dev token or valid backend-generated token
+      );
 
-      currentChannel = client.channel('messaging', id: 'support_$userId');
+      // Now create or get the channel
+      currentChannel = client.channel(
+        'messaging',
+        id: 'support_$userId',
+        extraData: {
+          'members': ['support_admin', userId],
+        },
+      );
 
-      await currentChannel!.watch();
-
+      await currentChannel?.watch();
       connected = true;
     } catch (e) {
       print('Error during chat init: $e');
