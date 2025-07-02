@@ -1,8 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
-import 'package:tournament_app/env/env.dart';
-
 import '../services/support_chat_client.dart';
 
 part 'support_chat_store.g.dart';
@@ -14,7 +12,7 @@ abstract class _SupportChatStore with Store {
   bool isLoading = false;
 
   @observable
-  Channel? currentChannel; // leave the field as is
+  Channel? currentChannel;
 
   @observable
   bool connected = false;
@@ -22,26 +20,26 @@ abstract class _SupportChatStore with Store {
   @observable
   bool showTypingIndicator = false;
 
+  final SupportChatClient streamClient = GetIt.I<SupportChatClient>();
+
   @action
   void setLoading(bool value) => isLoading = value;
 
   @action
   void setTyping(bool value) => showTypingIndicator = value;
 
-  final streamClient = GetIt.I<SupportChatClient>();
-
   @action
   Future<void> init(String userId) async {
     try {
-      final streamClient = GetIt.I<SupportChatClient>();
       setLoading(true);
 
       final userToken = await streamClient.fetchStreamToken(userId);
-      // This automatically creates the user in dev mode
+
+      // Connect user to the chat service
       await streamClient.client.connectUser(
         User(
           id: userId,
-          name: 'Kapil Sharma',
+          name: 'Arvind',
           image:
               'https://image.api.playstation.com/vulcan/ap/rnd/202308/1722/15f4ab1e0fe6a37609b164362a653c0e5bcee98a861d0f10.png',
           online: true,
@@ -50,7 +48,7 @@ abstract class _SupportChatStore with Store {
         userToken, // This must be a dev token or valid backend-generated token
       );
 
-      // Now create or get the channel
+      // Create or get the channel
       currentChannel = streamClient.client.channel(
         'messaging',
         id: 'support_$userId',
@@ -61,14 +59,9 @@ abstract class _SupportChatStore with Store {
 
       await currentChannel?.watch();
       connected = true;
-      // Listen for typing events
-      currentChannel?.on('typing.start').listen((event) {
-        setTyping(true);
-      });
 
-      currentChannel?.on('typing.stop').listen((event) {
-        setTyping(true);
-      });
+      // Setup event listeners for typing
+      _setupTypingListeners();
     } catch (e) {
       print('Error during chat init: $e');
       connected = false;
@@ -76,6 +69,22 @@ abstract class _SupportChatStore with Store {
     } finally {
       setLoading(false);
     }
+  }
+
+  void _setupTypingListeners() {
+    currentChannel?.on('typing.start').listen((event) {
+      final isCurrentUserTyping = event.isLocal;
+      if (!isCurrentUserTyping) {
+        setTyping(true);
+      }
+    });
+
+    currentChannel?.on('typing.stop').listen((event) {
+      final isCurrentUserTyping = event.isLocal;
+      if (!isCurrentUserTyping) {
+        setTyping(false);
+      }
+    });
   }
 
   @action
