@@ -57,6 +57,7 @@ dependencies:
   stream_chat_flutter: ^9.13.0
   http: ^1.4.0
   flutter_dotenv: ^5.2.1
+  firebase_messaging: ^14.7.10
   
 dev_dependencies:
   flutter_test:

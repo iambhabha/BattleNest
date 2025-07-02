@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
+import 'package:tournament_app/features/chat/services/support_chat_client.dart';
 import 'package:tournament_app/features/drawer/x_drawer.dart';
 import 'package:tournament_app/features/homepage/dashboard.dart';
 import 'package:tournament_app/features/homepage/store/home_navigation_view_model.dart';
 import 'package:tournament_app/features/widgets/common/home_bottom_nav_bar.dart';
 import 'package:tournament_app/features/widgets/common/x_app_bar.dart';
+import 'package:tournament_app/main.dart';
 
 class HomeScreen extends StatefulWidget {
   final HomeNavigationViewModel navigationViewModel;
@@ -23,6 +26,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final streamClient = GetIt.I<SupportChatClient>();
+
+  @override
+  void initState() {
+    super.initState();
+    streamClient.addDevice(userId);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,9 +51,17 @@ class _HomeScreenState extends State<HomeScreen> {
         title: 'ClashZone',
         leading: Builder(
           builder:
-              (context) => IconButton(icon: const Icon(Icons.menu), onPressed: () => Scaffold.of(context).openDrawer()),
+              (context) => IconButton(
+                icon: const Icon(Icons.menu),
+                onPressed: () => Scaffold.of(context).openDrawer(),
+              ),
         ),
-        actions: [Padding(padding: EdgeInsets.only(right: 12.0), child: Icon(Icons.login))],
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(right: 12.0),
+            child: Icon(Icons.login),
+          ),
+        ],
       ),
       bottomNavigationBar: Observer(
         builder:
@@ -51,7 +70,11 @@ class _HomeScreenState extends State<HomeScreen> {
               onTap: widget.navigationViewModel.updateTabIndex,
             ),
       ),
-      body: Observer(builder: (_) => HomeScreen._pages[widget.navigationViewModel.selectedTabIndex]),
+      body: Observer(
+        builder:
+            (_) =>
+                HomeScreen._pages[widget.navigationViewModel.selectedTabIndex],
+      ),
     );
   }
 }

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +19,8 @@ import 'package:tournament_app/features/homepage/homepage_screen.dart';
 import 'package:tournament_app/features/homepage/store/home_navigation_view_model.dart';
 import 'package:tournament_app/features/tournament/create_tournament_screen.dart';
 import 'package:tournament_app/services/app_localizations.dart';
-import 'package:tournament_app/stores/theme_store.dart';
 
+String get userId => '9a5fd02e-b77a-4cb2-a820-37a1fa61e6cf';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -77,7 +75,9 @@ class RootApp extends StatelessWidget {
           final isLoggedIn = authStore.currentUser != null;
           return isLoggedIn
               ? const CreateTournamentScreen()
-              : HomeScreen(navigationViewModel: GetIt.I<HomeNavigationViewModel>());
+              : HomeScreen(
+                navigationViewModel: GetIt.I<HomeNavigationViewModel>(),
+              );
         },
       ),
     );
